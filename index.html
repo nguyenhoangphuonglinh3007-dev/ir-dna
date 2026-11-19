@@ -668,14 +668,10 @@
 
   <script>
     /* =========================================================================
-       0. CẤU HÌNH GỬI EMAIL THẬT QUA EMAILJS (VY THAY 3 GIÁ TRỊ BÊN DƯỚI)
-       - Đăng ký miễn phí tại emailjs.com -> tạo Email Service (Gmail) & Template
-       - Biến dùng trong Template EmailJS:
-         {{to_email}}, {{student_name}}, {{student_id}}, {{primary_gene}},
-         {{secondary_gene}}, {{gene_breakdown}}, {{summary_text}}
+       0. CẤU HÌNH GỬI EMAIL THẬT QUA EMAILJS
     ========================================================================= */
     const EMAILJS_CONFIG = {
-      enabled: false, // Đổi thành true sau khi điền đủ 3 thông tin bên dưới
+      enabled: false,
       publicKey: 'YOUR_EMAILJS_PUBLIC_KEY',
       serviceId: 'YOUR_EMAILJS_SERVICE_ID',
       templateId: 'YOUR_EMAILJS_TEMPLATE_ID',
@@ -686,9 +682,7 @@
         if (window.emailjs && EMAILJS_CONFIG.publicKey && EMAILJS_CONFIG.publicKey !== 'YOUR_EMAILJS_PUBLIC_KEY') {
           window.emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
         }
-      } catch (err) {
-        // Bỏ qua lỗi khởi tạo khi chưa cấu hình khóa
-      }
+      } catch (err) {}
     })();
 
     /* =========================================================================
@@ -799,7 +793,6 @@
       },
     };
 
-    /* 8 Câu hỏi khảo sát tình huống Quan hệ quốc tế & Truyền thông quốc tế */
     const QUESTIONS = [
       {
         tagVi: 'Tình huống 01 · Phản ứng trước biến động',
@@ -1027,7 +1020,6 @@
       },
     ];
 
-    /* 50 Thông điệp động lực, an ủi & kết nối với "tia" IR DNA */
     const MESSAGES_50 = [
       { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Trong chuỗi xoắn IR DNA của riêng bạn, mỗi “tia” tính cách đều đang âm thầm tạo nên một bản sắc Quan hệ quốc tế không thể thay thế.' },
       { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Không có mã gen nào là “đẹp nhất” – chính cách các tia màu trong bạn đan cài mới làm nên dấu ấn độc nhất.' },
@@ -1142,7 +1134,7 @@
         renderQuestion();
       }
       if (!document.getElementById('screenResult').classList.contains('hidden') && latestResultSummary) {
-        renderResultScreen(latestResultSummary);
+        renderEmailConfirmationScreen();
       }
     }
 
@@ -1378,124 +1370,6 @@
     }
 
     /* =========================================================================
-       5. TÍNH ĐIỂM 6 MÃ GEN & HIỂN THỊ KẾT QUẢ
-    ========================================================================= */
-    function calculateAndShowResult() {
-      const rawScores = {
-        red: 1,
-        orange: 1,
-        yellow: 1,
-        green: 1,
-        blue: 1,
-        purple: 1,
-      };
-
-      userAnswers.forEach((ansIdx, qIdx) => {
-        if (ansIdx !== null) {
-          const chosen = QUESTIONS[qIdx].options[ansIdx];
-          Object.entries(chosen.scores).forEach(([geneKey, pts]) => {
-            rawScores[geneKey] += pts;
-          });
-        }
-      });
-
-      const totalPoints = Object.values(rawScores).reduce((sum, v) => sum + v, 0);
-      const ranked = Object.keys(rawScores)
-        .map((key) => ({
-          gene: GENES[key],
-          score: rawScores[key],
-          percent: Math.round((rawScores[key] / totalPoints) * 100),
-        }))
-        .sort((a, b) => b.score - a.score);
-
-      // Hiệu chỉnh làm tròn sao cho tổng bằng đúng 100%
-      const sumPercents = ranked.reduce((s, item) => s + item.percent, 0);
-      if (sumPercents !== 100) {
-        ranked[0].percent += 100 - sumPercents;
-      }
-
-      latestResultSummary = ranked;
-
-      // Tăng bộ đếm người tham gia trong localStorage
-      incrementParticipantCount();
-
-      // Chọn ngẫu nhiên một "tia" thông điệp khởi đầu phù hợp
-      drawRandomMessage(true);
-
-      document.getElementById('screenQuiz').classList.add('hidden');
-      document.getElementById('screenResult').classList.remove('hidden');
-      renderResultScreen(ranked);
-      renderWallNotes();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function renderResultScreen(ranked) {
-      const isVi = currentLang === 'vi';
-      const primary = ranked[0];
-      const secondary = ranked[1];
-
-      const banner = document.getElementById('resultBanner');
-      banner.style.background = primary.gene.gradient;
-
-      document.getElementById('resultStudentLabel').textContent = studentName
-        ? `${studentName} · ${studentId}`
-        : `MSSV: ${studentId}`;
-
-      document.getElementById('resultIntroGreeting').textContent = isVi
-        ? 'Mã gen bản sắc nổi bật nhất của bạn là:'
-        : 'Your most prominent identity color gene is:';
-
-      document.getElementById('resultGeneTitle').textContent = isVi
-        ? primary.gene.nameVi
-        : primary.gene.nameEn;
-
-      document.getElementById('resultGeneTagline').textContent = isVi
-        ? primary.gene.taglineVi
-        : primary.gene.taglineEn;
-
-      document.getElementById('resultPrimaryPercent').textContent = `${primary.percent}%`;
-      document.getElementById('resultPrimaryBadgeText').textContent = isVi ? 'Tia chủ đạo' : 'Primary Ray';
-
-      document.getElementById('secondaryDot').style.backgroundColor = secondary.gene.color;
-      document.getElementById('secondaryLabel').textContent = isVi
-        ? 'Tia màu bổ trợ song hành'
-        : 'Companion Secondary Gene';
-      document.getElementById('secondaryGeneName').textContent = isVi
-        ? `${secondary.gene.nameVi} (${secondary.percent}%)`
-        : `${secondary.gene.nameEn} (${secondary.percent}%)`;
-
-      document.getElementById('hybridNote').textContent = isVi
-        ? 'Sự giao thoa giữa hai tia màu này giúp bạn vừa phát huy thế mạnh cốt lõi, vừa linh hoạt thích ứng trong môi trường quốc tế.'
-        : 'The synergy between these two color rays empowers you to leverage your core strengths while adapting flexibly in global environments.';
-
-      document.getElementById('valTraits').textContent = isVi ? primary.gene.traitsVi : primary.gene.traitsEn;
-      document.getElementById('valStrengths').textContent = isVi ? primary.gene.strengthsVi : primary.gene.strengthsEn;
-      document.getElementById('valFields').textContent = isVi ? primary.gene.fieldsVi : primary.gene.fieldsEn;
-      document.getElementById('valSkills').textContent = isVi ? primary.gene.skillsVi : primary.gene.skillsEn;
-
-      // Render 6 thanh phổ màu IR DNA
-      const barsContainer = document.getElementById('geneBarsContainer');
-      barsContainer.innerHTML = '';
-      ranked.forEach((item) => {
-        const row = document.createElement('div');
-        row.className = 'space-y-1';
-        row.innerHTML = `
-          <div class="flex items-center justify-between text-xs sm:text-sm">
-            <span class="font-semibold text-[#132238] dark:text-slate-200 flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: ${item.gene.color}"></span>
-              ${isVi ? item.gene.nameVi : item.gene.nameEn}
-            </span>
-            <span class="font-extrabold text-[#132238] dark:text-white">${item.percent}%</span>
-          </div>
-          <div class="w-full h-2.5 rounded-full bg-[#132238]/8 dark:bg-slate-800 overflow-hidden">
-            <div class="h-full rounded-full transition-all duration-700" style="width: ${item.percent}%; background-color: ${item.gene.color}"></div>
-          </div>
-        `;
-        barsContainer.appendChild(row);
-      });
-    }
-
-    /* =========================================================================
        5. TÍNH ĐIỂM 6 MÃ GEN (LƯU NỘI BỘ ĐỂ GỬI MAIL) & HIỂN THỊ MÀN HÌNH XÁC NHẬN
     ========================================================================= */
     function calculateAndShowResult() {
@@ -1526,18 +1400,13 @@
         }))
         .sort((a, b) => b.score - a.score);
 
-      // Hiệu chỉnh làm tròn sao cho tổng bằng đúng 100%
       const sumPercents = ranked.reduce((s, item) => s + item.percent, 0);
       if (sumPercents !== 100) {
         ranked[0].percent += 100 - sumPercents;
       }
 
       latestResultSummary = ranked;
-
-      // Tăng bộ đếm người tham gia trong localStorage
       incrementParticipantCount();
-
-      // Chọn ngẫu nhiên một "tia" thông điệp khởi đầu phù hợp
       drawRandomMessage(true);
 
       document.getElementById('screenQuiz').classList.add('hidden');
@@ -1625,6 +1494,25 @@
       studentEmail = inputVal;
       emailConfirmed = true;
       updateEmailStatusUI();
+
+      if (typeof window.sendIrDnaToSheet === "function") {
+        const ranked = Array.isArray(latestResultSummary) ? latestResultSummary : [];
+        const mainItem = ranked[0];
+        const subItem = ranked[1];
+        const breakdownText = ranked
+          .map((item) => `${item.gene.nameVi}: ${item.percent}%`)
+          .join(" | ");
+
+        window.sendIrDnaToSheet({
+          fullName: studentName || "",
+          studentId: studentId || "",
+          email: studentEmail || "",
+          mainGen: mainItem ? `${mainItem.gene.nameVi} (${mainItem.percent}%)` : "",
+          subGen: subItem ? `${subItem.gene.nameVi} (${subItem.percent}%)` : "",
+          summary: breakdownText,
+        }).catch(() => {});
+      }
+
       sendSurveyResultEmail(studentEmail);
     }
 
@@ -1659,8 +1547,8 @@
       if (!canSendReal) {
         showToast(
           isVi
-            ? `Đã lưu mail ${targetEmail} (chế độ thử nghiệm — hãy bật EmailJS để gửi mail thật).`
-            : `Saved ${targetEmail} (demo mode — enable EmailJS to send real emails).`
+            ? `Đã lưu thông tin và email ${targetEmail}!`
+            : `Saved your response and email ${targetEmail}!`
         );
         return;
       }
@@ -1708,6 +1596,7 @@
           : `No email was entered at the start. Please enter your email and click "Confirm Email" so the IR DNA team can deliver your profile.`;
       }
     }
+
     function insertKeepsakePrompt(type) {
       const input = document.getElementById('wallNoteInput');
       const prompts = {
@@ -1717,33 +1606,6 @@
       };
       input.value = prompts[type] || '';
       input.focus();
-    }
-
-    function handleAddWallNote(e) {
-      e.preventDefault();
-      const input = document.getElementById('wallNoteInput');
-      const content = input.value.trim();
-      if (!content) return;
-
-      const primary = latestResultSummary ? latestResultSummary[0].gene : GENES.blue;
-      const shortGene = primary.nameVi.split('–')[0].trim();
-      const authorLabel = `${studentName || studentId || 'Thành viên IR'} · ${shortGene}`;
-
-      const notes = getWallNotes();
-      notes.unshift({
-        author: authorLabel,
-        color: primary.color,
-        text: content,
-      });
-
-      const trimmed = notes.slice(0, 8);
-      try {
-        localStorage.setItem('ir_dna_wall_notes', JSON.stringify(trimmed));
-      } catch (e) {}
-
-      input.value = '';
-      renderWallNotes();
-      showToast(currentLang === 'vi' ? 'Đã lưu thông điệp gợi nhớ của bạn!' : 'Your memory message has been saved!');
     }
 
     /* =========================================================================
@@ -1864,24 +1726,24 @@
       applyTranslations();
       renderWallNotes();
     });
+
     const IR_DNA_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwEuElvVScFKMR2VmVFSqyCNpM_nAvs6pVkcApnBmqydcEeRAJXSFsvojmwlREILYGC/exec";
 
-window.sendIrDnaToSheet = function (payload) {
-  return fetch(IR_DNA_WEB_APP_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
-    body: JSON.stringify({
-      fullName: payload.fullName || "",
-      studentId: payload.studentId || "",
-      email: payload.email || "",
-      mainGen: payload.mainGen || "",
-      subGen: payload.subGen || "",
-      summary: payload.summary || ""
-    })
-  });
-};
-
+    window.sendIrDnaToSheet = function (payload) {
+      return fetch(IR_DNA_WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          fullName: payload.fullName || "",
+          studentId: payload.studentId || "",
+          email: payload.email || "",
+          mainGen: payload.mainGen || "",
+          subGen: payload.subGen || "",
+          summary: payload.summary || ""
+        })
+      });
+    };
   </script>
 </body>
 </html>
