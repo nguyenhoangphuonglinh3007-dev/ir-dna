@@ -1864,6 +1864,24 @@
       applyTranslations();
       renderWallNotes();
     });
+    const IR_DNA_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwEuElvVScFKMR2VmVFSqyCNpM_nAvs6pVkcApnBmqydcEeRAJXSFsvojmwlREILYGC/exec";
+
+window.sendIrDnaToSheet = function (payload) {
+  return fetch(IR_DNA_WEB_APP_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({
+      fullName: payload.fullName || "",
+      studentId: payload.studentId || "",
+      email: payload.email || "",
+      mainGen: payload.mainGen || "",
+      subGen: payload.subGen || "",
+      summary: payload.summary || ""
+    })
+  });
+};
+
   </script>
 </body>
 </html>
