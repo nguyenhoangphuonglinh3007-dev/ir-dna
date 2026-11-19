@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IR DNA – Find Your Color | Giải mã DNA sinh viên Quan hệ quốc tế – HUFLIT</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Be Vietnam Pro & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', '"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', '"Be Vietnam Pro"', 'sans-serif'],
+          },
+          colors: {
+            paper: '#F7F5F0',
+            navy: {
+              DEFAULT: '#132238',
+              light: '#1E3554',
+              dark: '#0B1523',
+            },
+            brick: '#C0392B',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    /* Nền giấy kem ấm đặc trưng và các họa tiết bưu chính ngoại giao */
+    body {
+      background-color: #F7F5F0;
+      color: #132238;
+      overflow-x: hidden;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+    html.dark body {
+      background-color: #0E1726;
+      color: #F1F5F9;
+    }
+
+    /* Dải sọc bưu chính hàng không (Airmail Stripes) */
+    .airmail-border {
+      height: 8px;
+      width: 100%;
+      background: repeating-linear-gradient(
+        -45deg,
+        #132238,
+        #132238 14px,
+        transparent 14px,
+        transparent 24px,
+        #C0392B 24px,
+        #C0392B 38px,
+        transparent 38px,
+        transparent 48px
+      );
+    }
+    html.dark .airmail-border {
+      background: repeating-linear-gradient(
+        -45deg,
+        #3B82F6,
+        #3B82F6 14px,
+        transparent 14px,
+        transparent 24px,
+        #E05A47 24px,
+        #E05A47 38px,
+        transparent 38px,
+        transparent 48px
+      );
+    }
+
+    /* Hiệu ứng thẻ & chuyển cảnh mượt */
+    .fade-slide-in {
+      animation: fadeSlideIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Hiệu ứng lật/mở tia thông điệp */
+    .message-pop {
+      animation: messagePop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes messagePop {
+      0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* Xoay nhẹ con dấu triện nền */
+    .stamp-rotate {
+      animation: slowSpin 75s linear infinite;
+    }
+    @keyframes slowSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Thanh cuộn tinh gọn */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(19, 34, 56, 0.2);
+      border-radius: 9999px;
+    }
+    html.dark ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative selection:bg-[#132238] selection:text-white dark:selection:bg-sky-400 dark:selection:text-slate-950">
+
+  <!-- Dải bưu chính trên cùng -->
+  <div class="airmail-border sticky top-0 z-50"></div>
+
+  <!-- Họa tiết nền SVG: Dấu triện International Relations, đường bay & ngôi sao la bàn -->
+  <div class="pointer-events-none fixed inset-0 overflow-hidden z-0 opacity-65 dark:opacity-30" aria-hidden="true">
+    <!-- Dấu triện tròn góc phải trên -->
+    <svg class="absolute -right-14 top-16 w-72 h-72 sm:w-96 sm:h-96 text-[#132238]/15 dark:text-sky-300/15 stamp-rotate" viewBox="0 0 240 240" fill="none">
+      <circle cx="120" cy="120" r="108" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4" />
+      <circle cx="120" cy="120" r="96" stroke="currentColor" stroke-width="1.5" />
+      <circle cx="120" cy="120" r="64" stroke="currentColor" stroke-width="1.5" />
+      <!-- Kinh tuyến & vĩ tuyến địa cầu -->
+      <ellipse cx="120" cy="120" rx="32" ry="64" stroke="currentColor" stroke-width="1.2" />
+      <ellipse cx="120" cy="120" rx="52" ry="64" stroke="currentColor" stroke-width="1" />
+      <line x1="56" y1="120" x2="184" y2="120" stroke="currentColor" stroke-width="1.2" />
+      <path d="M64 92 Q120 105 176 92" stroke="currentColor" stroke-width="1" />
+      <path d="M64 148 Q120 135 176 148" stroke="currentColor" stroke-width="1" />
+      <defs>
+        <path id="topArc" d="M 40,120 A 80,80 0 1,1 200,120" />
+        <path id="bottomArc" d="M 200,120 A 80,80 0 1,1 40,120" />
+      </defs>
+      <text fill="currentColor" font-size="11.5" font-weight="700" letter-spacing="3.5">
+        <textPath href="#topArc" startOffset="50%" text-anchor="middle">INTERNATIONAL</textPath>
+      </text>
+      <text fill="currentColor" font-size="11.5" font-weight="700" letter-spacing="4">
+        <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">RELATIONS • HUFLIT</textPath>
+      </text>
+    </svg>
+
+    <!-- Đường bay nét đứt + máy bay nhỏ -->
+    <svg class="absolute inset-0 w-full h-full text-[#132238]/20 dark:text-sky-300/20" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
+      <path d="M-40 620 C 320 590, 620 420, 1180 210" stroke="currentColor" stroke-width="2" stroke-dasharray="8 8" />
+      <!-- Ngôi sao la bàn 4 cánh bên trái -->
+      <g transform="translate(150, 560)" fill="currentColor">
+        <path d="M0 -24 L5 -5 L24 0 L5 5 L0 24 L-5 5 L-24 0 L-5 -5 Z" />
+      </g>
+      <!-- Máy bay giấy / phản lực nhỏ trên đường bay -->
+      <g transform="translate(1195, 203) rotate(-22)" fill="currentColor">
+        <path d="M0 0 L-26 -10 L-20 0 L-26 10 Z" />
+      </g>
+      <!-- Địa cầu mờ ở góc dưới trái -->
+      <g transform="translate(80, 860)" stroke="currentColor" stroke-width="1.5">
+        <circle cx="0" cy="0" r="160" />
+        <ellipse cx="0" cy="0" rx="75" ry="160" />
+        <ellipse cx="0" cy="0" rx="130" ry="160" />
+        <line x1="-160" y1="0" x2="160" y2="0" />
+        <path d="M-140 -75 Q0 -40 140 -75" />
+        <path d="M-140 75 Q0 40 140 75" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- Thanh Header điều hướng -->
+  <header class="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-5 pb-3 flex items-center justify-between gap-3">
+    <!-- Logo cụm 6 chấm màu + IR DNA -->
+    <button onclick="resetToHome()" class="flex items-center gap-3 text-left group focus:outline-none">
+      <div class="relative w-11 h-11 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-[#132238]/10 dark:border-slate-700 flex items-center justify-center transition-transform group-hover:scale-105">
+        <!-- 6 chấm gen màu sắc -->
+        <div class="grid grid-cols-3 gap-1 p-1.5">
+          <span class="w-2 h-2 rounded-full bg-[#D9383A]"></span>
+          <span class="w-2 h-2 rounded-full bg-[#E67E22]"></span>
+          <span class="w-2 h-2 rounded-full bg-[#EAB308]"></span>
+          <span class="w-2 h-2 rounded-full bg-[#16A34A]"></span>
+          <span class="w-2 h-2 rounded-full bg-[#2563EB]"></span>
+          <span class="w-2 h-2 rounded-full bg-[#7C3AED]"></span>
+        </div>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-[#132238] dark:text-white">IR DNA</span>
+          <span class="hidden sm:inline-block text-[11px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-[#132238]/10 dark:bg-sky-400/15 text-[#132238] dark:text-sky-300">HUFLIT</span>
+        </div>
+        <p id="headerSubtitle" class="text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-[#132238]/65 dark:text-slate-400">
+          TRẠM 2 · FIND YOUR COLOR
+        </p>
+      </div>
+    </button>
+
+    <!-- Bộ chuyển ngôn ngữ VI/EN & Dark/Light Mode -->
+    <div class="flex items-center gap-2 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md px-2.5 py-1.5 rounded-full shadow-sm border border-[#132238]/10 dark:border-slate-700">
+      <button id="langViBtn" onclick="setLanguage('vi')" class="px-2.5 py-1 rounded-full text-xs font-bold transition-all bg-[#132238] text-white dark:bg-sky-500 dark:text-slate-950">
+        VI
+      </button>
+      <button id="langEnBtn" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-full text-xs font-bold transition-all text-[#132238]/60 dark:text-slate-400 hover:text-[#132238] dark:hover:text-white">
+        EN
+      </button>
+      <span class="w-px h-4 bg-[#132238]/15 dark:bg-slate-600 mx-0.5"></span>
+      <button id="themeToggleBtn" onclick="toggleTheme()" aria-label="Chuyển giao diện Sáng/Tối" class="p-1.5 rounded-full text-[#132238] dark:text-amber-300 hover:bg-[#132238]/5 dark:hover:bg-slate-700 transition-colors">
+        <!-- Icon Mặt trăng (Light mode) -->
+        <svg id="moonIcon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+        </svg>
+        <!-- Icon Mặt trời (Dark mode) -->
+        <svg id="sunIcon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5" />
+          <path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Nội dung chính -->
+  <main class="relative z-10 flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-8 flex flex-col justify-center">
+
+    <!-- =========================================================
+         MÀN HÌNH 1: CHECK-IN / GIỚI THIỆU DỰ ÁN (LANDING)
+    ========================================================== -->
+    <section id="screenLanding" class="fade-slide-in space-y-6 sm:space-y-8">
+      <!-- Phần Hero Header -->
+      <div class="max-w-2xl space-y-3 sm:space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#132238]/8 dark:bg-sky-400/10 border border-[#132238]/10 dark:border-sky-400/20">
+          <span class="w-2 h-2 rounded-full bg-[#C0392B] animate-pulse"></span>
+          <span id="heroEyebrow" class="text-xs font-bold tracking-widest uppercase text-[#132238] dark:text-sky-300">
+            GIẢI MÃ BẢN SẮC CỦA BẠN
+          </span>
+        </div>
+
+        <h1 id="heroTitle" class="font-display font-extrabold text-4xl sm:text-5xl md:text-[54px] leading-[1.12] tracking-tight text-[#132238] dark:text-white">
+          Tìm màu sắc <br class="sm:hidden" />
+          <span class="text-[#1E40AF] dark:text-sky-400">trong bạn.</span>
+        </h1>
+
+        <p id="heroDesc" class="text-sm sm:text-base leading-relaxed text-[#132238]/80 dark:text-slate-300">
+          Mỗi người đều mang trong mình một gam màu riêng biệt – từ bản lĩnh đàm phán, sự nhạy bén đa văn hóa đến tư duy kết nối không biên giới. Bắt đầu hành trình giải mã <strong class="font-semibold text-[#132238] dark:text-white">IR DNA</strong> để chạm tới màu sắc thật sự của bạn.
+        </p>
+      </div>
+
+      <!-- Thẻ Check-in Bắt đầu khám phá -->
+      <div class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl shadow-[#132238]/8 dark:shadow-black/40 border border-[#132238]/10 dark:border-slate-800 max-w-xl">
+        <div class="flex items-start justify-between gap-4 mb-5">
+          <div>
+            <h2 id="checkinTitle" class="font-display font-bold text-xl sm:text-2xl text-[#132238] dark:text-white">
+              Bắt đầu khám phá
+            </h2>
+            <p id="checkinSub" class="text-xs sm:text-sm text-[#132238]/65 dark:text-slate-400 mt-1">
+              Nhập thông tin sinh viên hoặc chọn chế độ trải nghiệm nhanh để tiếp tục.
+            </p>
+          </div>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-xl bg-amber-100/80 dark:bg-amber-500/15 text-amber-900 dark:text-amber-300 shrink-0">
+            8 câu · ~2 phút
+          </span>
+        </div>
+
+        <form id="checkinForm" onsubmit="handleStartQuiz(event)" class="space-y-4">
+          <!-- Họ và tên -->
+          <div>
+            <label for="studentName" id="labelName" class="block text-xs sm:text-sm font-semibold text-[#132238] dark:text-slate-200 mb-1.5">
+              Họ và tên / Biệt danh <span class="font-normal text-[#132238]/50 dark:text-slate-400">(không bắt buộc)</span>
+            </label>
+            <input
+              type="text"
+              id="studentName"
+              placeholder="Ví dụ: Minh Anh"
+              class="w-full px-4 py-3 rounded-2xl bg-[#F7F5F0]/70 dark:bg-slate-800 border border-[#132238]/15 dark:border-slate-700 text-sm sm:text-base text-[#132238] dark:text-white placeholder-[#132238]/40 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#132238] dark:focus:ring-sky-400 transition-all"
+            />
+          </div>
+
+          <!-- Mã số sinh viên -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label for="studentId" id="labelId" class="block text-xs sm:text-sm font-semibold text-[#132238] dark:text-slate-200">
+                Mã số sinh viên <span class="text-[#C0392B]">*</span>
+              </label>
+              <button
+                type="button"
+                onclick="fillDemoId()"
+                id="demoFillBtn"
+                class="text-xs font-semibold text-[#1E40AF] dark:text-sky-400 hover:underline focus:outline-none"
+              >
+                Dùng mã trải nghiệm nhanh →
+              </button>
+            </div>
+            <input
+              type="text"
+              id="studentId"
+              placeholder="Nhập mã số sinh viên (VD: 22DH710001)"
+              class="w-full px-4 py-3 rounded-2xl bg-[#F7F5F0]/70 dark:bg-slate-800 border border-[#132238]/15 dark:border-slate-700 text-sm sm:text-base text-[#132238] dark:text-white placeholder-[#132238]/40 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#132238] dark:focus:ring-sky-400 transition-all"
+            />
+            <p id="idErrorMsg" class="hidden text-xs font-medium text-[#C0392B] mt-1.5">
+              Vui lòng nhập Mã số sinh viên hoặc nhấn "Dùng mã trải nghiệm nhanh".
+            </p>
+          </div>
+
+          <!-- Email nhận kết quả IR DNA (tùy chọn ở bước đầu, có thể xác nhận/nhập thêm sau khi hoàn tất) -->
+          <div>
+            <label for="studentEmail" id="labelEmail" class="block text-xs sm:text-sm font-semibold text-[#132238] dark:text-slate-200 mb-1.5">
+              Email nhận kết quả IR DNA <span class="font-normal text-[#132238]/50 dark:text-slate-400">(khuyến nghị để gửi hồ sơ)</span>
+            </label>
+            <input
+              type="email"
+              id="studentEmail"
+              placeholder="Ví dụ: mssv@st.huflit.edu.vn hoặc email cá nhân"
+              class="w-full px-4 py-3 rounded-2xl bg-[#F7F5F0]/70 dark:bg-slate-800 border border-[#132238]/15 dark:border-slate-700 text-sm sm:text-base text-[#132238] dark:text-white placeholder-[#132238]/40 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#132238] dark:focus:ring-sky-400 transition-all"
+            />
+          </div>
+
+          <!-- Nút Tiếp tục -->
+          <button
+            type="submit"
+            id="startBtn"
+            class="w-full py-3.5 px-6 rounded-2xl bg-[#132238] hover:bg-[#1E3554] active:scale-[0.99] dark:bg-sky-500 dark:hover:bg-sky-400 text-white dark:text-slate-950 font-bold text-sm sm:text-base shadow-lg shadow-[#132238]/20 dark:shadow-sky-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span id="startBtnText">Tiếp tục</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </button>
+        </form>
+
+        <!-- Dải 6 màu gen thu nhỏ giới thiệu -->
+        <div class="mt-6 pt-5 border-t border-[#132238]/10 dark:border-slate-800">
+          <p id="geneStripLabel" class="text-[11px] font-bold uppercase tracking-wider text-[#132238]/55 dark:text-slate-400 mb-2.5">
+            6 Mã Gen Bản Sắc Trong Triển Lãm IR DNA
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#D9383A]/10 text-[#B91C1C] dark:text-red-300">
+              <span class="w-2 h-2 rounded-full bg-[#D9383A]"></span> Gen Đỏ
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#E67E22]/12 text-[#C2410C] dark:text-orange-300">
+              <span class="w-2 h-2 rounded-full bg-[#E67E22]"></span> Gen Cam
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#EAB308]/15 text-[#A16207] dark:text-yellow-300">
+              <span class="w-2 h-2 rounded-full bg-[#EAB308]"></span> Gen Vàng
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#16A34A]/12 text-[#15803D] dark:text-green-300">
+              <span class="w-2 h-2 rounded-full bg-[#16A34A]"></span> Gen Xanh lá
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#2563EB]/12 text-[#1D4ED8] dark:text-blue-300">
+              <span class="w-2 h-2 rounded-full bg-[#2563EB]"></span> Gen Xanh dương
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#7C3AED]/12 text-[#6D28D9] dark:text-purple-300">
+              <span class="w-2 h-2 rounded-full bg-[#7C3AED]"></span> Gen Tím
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         MÀN HÌNH 2: BỘ CÂU HỎI KHẢO SÁT TƯƠNG TÁC (8 CÂU)
+    ========================================================== -->
+    <section id="screenQuiz" class="hidden fade-slide-in">
+      <div class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-3xl p-5 sm:p-8 shadow-xl shadow-[#132238]/8 dark:shadow-black/40 border border-[#132238]/10 dark:border-slate-800">
+        <!-- Thanh tiến độ & Nút quay lại -->
+        <div class="flex items-center justify-between gap-4 mb-4">
+          <button
+            type="button"
+            onclick="prevQuestion()"
+            id="prevBtn"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-[#132238]/75 dark:text-slate-300 hover:bg-[#132238]/5 dark:hover:bg-slate-800 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span id="prevBtnText">Quay lại</span>
+          </button>
+
+          <div class="text-right">
+            <span id="questionCounter" class="text-xs sm:text-sm font-extrabold text-[#132238] dark:text-sky-400">
+              Câu 1 / 8
+            </span>
+          </div>
+        </div>
+
+        <!-- Thanh progress bar -->
+        <div class="w-full h-2.5 bg-[#132238]/10 dark:bg-slate-800 rounded-full overflow-hidden mb-6">
+          <div id="progressBar" class="h-full bg-gradient-to-r from-[#132238] via-[#2563EB] to-[#C0392B] dark:from-sky-400 dark:to-indigo-400 rounded-full transition-all duration-500" style="width: 12.5%"></div>
+        </div>
+
+        <!-- Nội dung câu hỏi -->
+        <div id="questionContainer" class="space-y-5">
+          <div class="space-y-2">
+            <span id="questionTag" class="inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-[#F7F5F0] dark:bg-slate-800 text-[#132238]/70 dark:text-slate-300">
+              Tình huống đối ngoại
+            </span>
+            <h2 id="questionText" class="font-display font-bold text-lg sm:text-2xl leading-snug text-[#132238] dark:text-white">
+              <!-- Nội dung câu hỏi được render bằng JS -->
+            </h2>
+          </div>
+
+          <!-- Danh sách các phương án lựa chọn -->
+          <div id="optionsList" class="grid grid-cols-1 gap-3">
+            <!-- Các lựa chọn được render bằng JS -->
+          </div>
+        </div>
+
+        <!-- Thanh điều hướng dưới cùng của Quiz -->
+        <div class="mt-6 pt-4 border-t border-[#132238]/10 dark:border-slate-800 flex items-center justify-between text-xs text-[#132238]/55 dark:text-slate-400">
+          <span id="quizHintText">Chọn một phương án phản ánh tự nhiên nhất cách bạn phản ứng.</span>
+          <span id="activeStudentBadge" class="font-semibold text-[#132238] dark:text-slate-300"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         MÀN HÌNH 3: XÁC NHẬN GỬI MAIL KẾT QUẢ + THÔNG ĐIỆP GỢI NHỚ + 50 TIA THÔNG ĐIỆP
+         (Ẩn bảng điểm/phân tích chi tiết ngay sau khi làm bài theo yêu cầu)
+    ========================================================== -->
+    <section id="screenResult" class="hidden fade-slide-in space-y-6 sm:space-y-8 pb-10">
+
+      <!-- 3.1 THÔNG BÁO HOÀN TẤT & XÁC NHẬN GỬI KẾT QUẢ QUA EMAIL -->
+      <div id="emailDeliveryCard" class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-3xl overflow-hidden shadow-xl shadow-[#132238]/10 dark:shadow-black/40 border border-[#132238]/10 dark:border-slate-800">
+        <!-- Banner ngoại giao xanh navy / xanh lam -->
+        <div class="p-6 sm:p-8 text-white relative overflow-hidden" style="background: linear-gradient(135deg, #132238 0%, #1E3A8A 100%);">
+          <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-2">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm text-xs font-bold uppercase tracking-wider">
+                <span>✉️ IR DNA · EMAIL DISPATCH</span>
+                <span>•</span>
+                <span id="resultStudentLabel">MSSV: 22DH710001</span>
+              </div>
+              <h2 id="emailNoticeTitle" class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">
+                Đã ghi nhận bài khảo sát – Kết quả IR DNA sẽ được gửi qua email!
+              </h2>
+              <p id="emailNoticeDesc" class="text-sm sm:text-base text-white/85 leading-relaxed max-w-2xl">
+                Để giữ trọn vẹn trải nghiệm bất ngờ và trau chuốt hồ sơ bản sắc cho từng bạn, nhóm <strong>IR DNA</strong> không hiển thị bảng điểm/mã gen chi tiết ngay tại đây mà sẽ gửi trọn vẹn hồ sơ giải mã 6 mã gen màu sắc tới hộp thư email của bạn.
+              </p>
+            </div>
+
+            <div class="self-start sm:self-center shrink-0 bg-white/12 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 text-center min-w-[130px]">
+              <div class="text-2xl mb-0.5">📬</div>
+              <div id="dispatchStatusBadge" class="text-xs font-extrabold uppercase tracking-wider text-amber-200">
+                Đang xếp hàng gửi
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Khối xác nhận / cập nhật địa chỉ email nhận kết quả -->
+        <div class="p-6 sm:p-8 space-y-5">
+          <div class="p-4 sm:p-5 rounded-2xl bg-[#F7F5F0] dark:bg-slate-800/80 border border-[#132238]/10 dark:border-slate-700 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <label for="confirmEmailInput" id="confirmEmailLabel" class="text-xs sm:text-sm font-bold text-[#132238] dark:text-white">
+                Địa chỉ email nhận hồ sơ IR DNA của bạn:
+              </label>
+              <span id="emailSavedIndicator" class="text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+                ✓ Sẵn sàng gửi mail
+              </span>
+            </div>
+
+            <form onsubmit="handleConfirmEmail(event)" class="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                id="confirmEmailInput"
+                placeholder="Nhập email sinh viên HUFLIT hoặc email cá nhân để nhận kết quả"
+                class="flex-1 px-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-[#132238]/15 dark:border-slate-600 text-sm text-[#132238] dark:text-white placeholder-[#132238]/40 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#132238] dark:focus:ring-sky-400"
+              />
+              <button
+                type="submit"
+                id="confirmEmailBtn"
+                class="px-5 py-3 rounded-2xl bg-[#132238] hover:bg-[#1E3554] dark:bg-sky-500 dark:hover:bg-sky-400 text-white dark:text-slate-950 font-bold text-xs sm:text-sm shrink-0 transition-all cursor-pointer"
+              >
+                Xác nhận gửi mail
+              </button>
+            </form>
+
+            <p id="emailDeliveryDetail" class="text-xs sm:text-sm text-[#132238]/75 dark:text-slate-300 leading-relaxed">
+              Hồ sơ của bạn (gồm mã gen nổi bật, gợi ý lĩnh vực Quan hệ quốc tế & kỹ năng phát triển) sẽ được đội ngũ gửi đến email đã đăng ký sau khi tổng hợp.
+            </p>
+          </div>
+
+          <!-- Nút làm lại khảo sát -->
+          <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+            <span id="hiddenResultNote" class="text-xs text-[#132238]/60 dark:text-slate-400 italic">
+              * Kết quả chi tiết được bảo mật và gửi riêng qua email cho từng người tham gia.
+            </span>
+            <button
+              type="button"
+              onclick="restartQuiz()"
+              id="retakeBtn"
+              class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-[#F7F5F0] hover:bg-[#ECE8DF] dark:bg-slate-800 dark:hover:bg-slate-700 text-[#132238] dark:text-slate-200 font-bold text-xs sm:text-sm border border-[#132238]/10 dark:border-slate-700 transition-all cursor-pointer"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M5.64 18.36A9 9 0 0019.78 12M18.36 5.64A9 9 0 004.22 12" />
+              </svg>
+              <span id="retakeBtnText">Làm lại khảo sát</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3.2 LỜI CẢM ƠN SAU KHẢO SÁT -->
+      <div class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-3xl p-6 sm:p-7 border border-[#132238]/10 dark:border-slate-800 shadow-sm text-center space-y-3">
+        <div class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-[#C0392B]/10 text-[#C0392B] dark:bg-rose-500/15 dark:text-rose-300 mx-auto">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+        </div>
+        <h3 id="thankYouHeading" class="font-display font-bold text-lg sm:text-xl text-[#132238] dark:text-white">
+          Cảm ơn bạn đã đồng hành cùng IR DNA!
+        </h3>
+        <p id="thankYouBody" class="text-sm sm:text-base leading-relaxed text-[#132238]/80 dark:text-slate-300 max-w-2xl mx-auto">
+          Cảm ơn bạn đã dành thời gian tham gia khảo sát và chia sẻ dấu ấn bản sắc cùng <strong>IR DNA – Find Your Color</strong>; mỗi câu trả lời của bạn là một mảnh ghép quý giá giúp bức tranh cộng đồng Quan hệ quốc tế của chúng mình thêm trọn vẹn và đa sắc!
+        </p>
+      </div>
+
+      <!-- 3.3 HỘP NHẬN "TIA" THÔNG ĐIỆP NGẪU NHIÊN (50 THÔNG ĐIỆP ĐỘNG LỰC & AN ỦI) -->
+      <div class="bg-gradient-to-br from-[#132238] via-[#1A2F4E] to-[#132238] dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl border border-white/10 relative overflow-hidden">
+        <div class="relative z-10 space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <span id="capsuleEyebrow" class="inline-block text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/15 text-amber-200 mb-2">
+                ✨ TRẠM TIẾP SỨC TINH THẦN · 50 TIA THÔNG ĐIỆP
+              </span>
+              <h3 id="capsuleTitle" class="font-display font-extrabold text-xl sm:text-2xl">
+                Nhận một “tia” thông điệp dành riêng cho bạn
+              </h3>
+              <p id="capsuleSub" class="text-xs sm:text-sm text-white/75 mt-1">
+                Một lời nhắn nhỏ về lựa chọn, ưu điểm, nghề nghiệp hoặc sự an ủi nhẹ nhàng gửi từ đội ngũ IR DNA.
+              </p>
+            </div>
+            <span id="messageIndexBadge" class="self-start sm:self-center text-xs font-bold px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-sky-200 shrink-0">
+              Tia #01 / 50
+            </span>
+          </div>
+
+          <!-- Khung hiển thị thông điệp random -->
+          <div id="randomMessageCard" class="message-pop rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-5 sm:p-6 min-h-[120px] flex flex-col justify-between gap-4">
+            <div class="space-y-2">
+              <span id="messageCategoryBadge" class="inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-200">
+                Chuỗi xoắn IR DNA & Bản sắc
+              </span>
+              <p id="randomMessageText" class="text-base sm:text-lg font-medium leading-relaxed text-white">
+                “Trong chuỗi xoắn IR DNA của riêng bạn, mỗi ‘tia’ tính cách đều đang âm thầm tạo nên một bản sắc Quan hệ quốc tế không thể thay thế.”
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-white/10">
+              <span class="text-xs text-white/60 italic">— Gửi bạn từ IR DNA · IDENTITY (WHO WE ARE)</span>
+              <button
+                type="button"
+                onclick="copyCurrentMessage()"
+                id="copyMsgBtn"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-xs font-semibold text-white transition-colors cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                </svg>
+                <span id="copyBtnLabel">Sao chép thông điệp</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onclick="drawRandomMessage(false)"
+              id="drawMsgBtn"
+              class="px-5 py-3 rounded-2xl bg-amber-400 hover:bg-amber-300 text-[#132238] font-extrabold text-xs sm:text-sm shadow-lg transition-all cursor-pointer"
+            >
+              🎲 Rút tia thông điệp mới
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3.4 GÓC GỬI THÔNG ĐIỆP GỢI NHỚ / LƯU DẤU ẤN TRIỂN LÃM -->
+      <div class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-md border border-[#132238]/10 dark:border-slate-800 space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <span id="keepsakeEyebrow" class="inline-block text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-100/80 dark:bg-amber-500/15 text-amber-900 dark:text-amber-300 mb-1.5">
+              🕊️ THÔNG ĐIỆP GỢI NHỚ · KEEPSAKE WALL
+            </span>
+            <h3 id="wallTitle" class="font-display font-bold text-lg sm:text-xl text-[#132238] dark:text-white">
+              Gửi một thông điệp gợi nhớ cho chính bạn & cộng đồng IR DNA
+            </h3>
+            <p id="wallSub" class="text-xs sm:text-sm text-[#132238]/65 dark:text-slate-400 mt-0.5">
+              Để lại một lời dặn dò, một kỷ niệm đẹp hoặc điều bạn muốn nhớ nhất về bản sắc của mình khi mở email kết quả sau này.
+            </p>
+          </div>
+          <span id="participantCounterBadge" class="text-xs font-bold px-3 py-1.5 rounded-full bg-[#132238]/8 dark:bg-sky-400/15 text-[#132238] dark:text-sky-300">
+            128 mảnh ghép đã tham gia
+          </span>
+        </div>
+
+        <form onsubmit="handleAddWallNote(event)" class="space-y-3">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="insertKeepsakePrompt('vi-self')" class="text-xs px-3 py-1.5 rounded-xl bg-[#F7F5F0] hover:bg-[#ECE8DF] dark:bg-slate-800 dark:hover:bg-slate-700 text-[#132238] dark:text-slate-200 font-medium transition-colors cursor-pointer">
+              + Nhắn nhủ bản thân tương lai
+            </button>
+            <button type="button" onclick="insertKeepsakePrompt('vi-team')" class="text-xs px-3 py-1.5 rounded-xl bg-[#F7F5F0] hover:bg-[#ECE8DF] dark:bg-slate-800 dark:hover:bg-slate-700 text-[#132238] dark:text-slate-200 font-medium transition-colors cursor-pointer">
+              + Gửi lời cảm ơn nhóm IR DNA
+            </button>
+            <button type="button" onclick="insertKeepsakePrompt('vi-ir')" class="text-xs px-3 py-1.5 rounded-xl bg-[#F7F5F0] hover:bg-[#ECE8DF] dark:bg-slate-800 dark:hover:bg-slate-700 text-[#132238] dark:text-slate-200 font-medium transition-colors cursor-pointer">
+              + Dấu ấn sinh viên HUFLIT IR
+            </button>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              id="wallNoteInput"
+              maxlength="220"
+              placeholder="Viết một thông điệp gợi nhớ đầy ý nghĩa để lưu lại tại triển lãm IR DNA..."
+              class="flex-1 px-4 py-3 rounded-2xl bg-[#F7F5F0]/80 dark:bg-slate-800 border border-[#132238]/15 dark:border-slate-700 text-sm text-[#132238] dark:text-white placeholder-[#132238]/40 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#132238] dark:focus:ring-sky-400"
+            />
+            <button
+              type="submit"
+              id="wallSubmitBtn"
+              class="px-5 py-3 rounded-2xl bg-[#132238] hover:bg-[#1E3554] dark:bg-sky-500 dark:hover:bg-sky-400 text-white dark:text-slate-950 font-bold text-sm shrink-0 transition-all cursor-pointer"
+            >
+              Lưu thông điệp
+            </button>
+          </div>
+        </form>
+
+        <!-- Danh sách các thông điệp gợi nhớ -->
+        <div id="wallNotesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+          <!-- Render bằng JS -->
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Toast thông báo nhỏ (thay thế hoàn toàn alert) -->
+  <div id="toastNotification" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-full bg-[#132238] dark:bg-sky-500 text-white dark:text-slate-950 text-xs sm:text-sm font-semibold shadow-lg opacity-0 pointer-events-none transition-all duration-300">
+    Đã sao chép thông điệp!
+  </div>
+
+  <!-- Footer -->
+  <footer class="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 py-5 text-center text-xs text-[#132238]/60 dark:text-slate-400 space-y-1">
+    <p class="font-semibold text-[#132238]/80 dark:text-slate-300">
+      IDENTITY (WHO WE ARE) – IR DNA: Giải mã DNA sinh viên Quan hệ quốc tế – HUFLIT
+    </p>
+    <p>“Mỗi người mang một bản sắc riêng, nhưng chính sự đa dạng ấy tạo nên sức mạnh kết nối của cộng đồng Quan hệ quốc tế.”</p>
+  </footer>
+
+  <!-- Canvas ẩn để xuất thẻ kết quả PNG chất lượng cao -->
+  <canvas id="exportCanvas" class="hidden"></canvas>
+
+  <!-- Thư viện EmailJS để gửi email kết quả thật về Gmail -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+    /* =========================================================================
+       0. CẤU HÌNH GỬI EMAIL THẬT QUA EMAILJS (VY THAY 3 GIÁ TRỊ BÊN DƯỚI)
+       - Đăng ký miễn phí tại emailjs.com -> tạo Email Service (Gmail) & Template
+       - Biến dùng trong Template EmailJS:
+         {{to_email}}, {{student_name}}, {{student_id}}, {{primary_gene}},
+         {{secondary_gene}}, {{gene_breakdown}}, {{summary_text}}
+    ========================================================================= */
+    const EMAILJS_CONFIG = {
+      enabled: false, // Đổi thành true sau khi điền đủ 3 thông tin bên dưới
+      publicKey: 'YOUR_EMAILJS_PUBLIC_KEY',
+      serviceId: 'YOUR_EMAILJS_SERVICE_ID',
+      templateId: 'YOUR_EMAILJS_TEMPLATE_ID',
+    };
+
+    (function initEmailJsSafe() {
+      try {
+        if (window.emailjs && EMAILJS_CONFIG.publicKey && EMAILJS_CONFIG.publicKey !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+          window.emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
+        }
+      } catch (err) {
+        // Bỏ qua lỗi khởi tạo khi chưa cấu hình khóa
+      }
+    })();
+
+    /* =========================================================================
+       1. DỮ LIỆU CỐT LÕI CỦA DỰ ÁN IR DNA (6 MÃ GEN, 8 CÂU HỎI, 50 THÔNG ĐIỆP)
+    ========================================================================= */
+    const GENES = {
+      red: {
+        id: 'red',
+        color: '#D9383A',
+        gradient: 'linear-gradient(135deg, #D9383A 0%, #991B1B 100%)',
+        nameVi: 'Gen Đỏ – Người dẫn dắt',
+        nameEn: 'Red Gene – The Leader',
+        taglineVi: '“Quyết đoán, tự tin và sẵn sàng cầm lái trên những bàn đàm phán đa phương.”',
+        taglineEn: '“Decisive, confident, and ready to take the helm at multilateral negotiation tables.”',
+        traitsVi: 'Quyết đoán, tự tin, chủ động, bản lĩnh và yêu thích những thử thách mới.',
+        traitsEn: 'Decisive, confident, proactive, resilient, and eager for new challenges.',
+        strengthsVi: 'Lãnh đạo đội nhóm, đàm phán thương lượng, ra quyết định nhanh và giải quyết vấn đề.',
+        strengthsEn: 'Team leadership, negotiation, rapid decision-making, and problem-solving.',
+        fieldsVi: 'Ngoại giao đa phương, Chính sách quốc tế • Nghề nghiệp: Nhà ngoại giao, Chuyên viên đối ngoại, Quản lý dự án quốc tế.',
+        fieldsEn: 'Multilateral Diplomacy, International Policy • Careers: Diplomat, Foreign Affairs Specialist, International Project Manager.',
+        skillsVi: 'Đàm phán nâng cao, lãnh đạo chiến lược và tư duy phản biện tình huống.',
+        skillsEn: 'Advanced negotiation, strategic leadership, and situational critical thinking.',
+      },
+      orange: {
+        id: 'orange',
+        color: '#E67E22',
+        gradient: 'linear-gradient(135deg, #E67E22 0%, #B45309 100%)',
+        nameVi: 'Gen Cam – Người kết nối',
+        nameEn: 'Orange Gene – The Connector',
+        taglineVi: '“Năng động, cởi mở và là nhịp cầu gắn kết con người giữa các nền văn hóa.”',
+        taglineEn: '“Energetic, open-minded, and a bridge connecting people across cultures.”',
+        traitsVi: 'Hòa đồng, năng động, nhạy bén trong giao tiếp và giàu tinh thần hợp tác.',
+        traitsEn: 'Sociable, energetic, communicative, and deeply collaborative.',
+        strengthsVi: 'Xây dựng mạng lưới quan hệ, thuyết trình, điều phối hoạt động và làm việc nhóm đa văn hóa.',
+        strengthsEn: 'Relationship building, public speaking, coordination, and cross-cultural teamwork.',
+        fieldsVi: 'Truyền thông quốc tế, Ngoại giao văn hóa, Hợp tác quốc tế • Nghề nghiệp: Chuyên viên truyền thông quốc tế, Tổ chức sự kiện, Quan hệ công chúng (PR).',
+        fieldsEn: 'International Communication, Cultural Diplomacy • Careers: International PR Specialist, Event Organizer, Cultural Liaison.',
+        skillsVi: 'Giao tiếp liên văn hóa, sáng tạo nội dung và kỹ năng thuyết trình trước công chúng.',
+        skillsEn: 'Intercultural communication, content creation, and public presentation skills.',
+      },
+      yellow: {
+        id: 'yellow',
+        color: '#EAB308',
+        gradient: 'linear-gradient(135deg, #EAB308 0%, #B45309 100%)',
+        nameVi: 'Gen Vàng – Người truyền cảm hứng',
+        nameEn: 'Yellow Gene – The Inspirer',
+        taglineVi: '“Lạc quan, giàu ý tưởng và biết cách biến thông điệp toàn cầu trở nên gần gũi.”',
+        taglineEn: '“Optimistic, imaginative, and skilled at making global messages resonate.”',
+        traitsVi: 'Lạc quan, giàu ý tưởng sáng tạo, nhiệt tình và luôn tò mò khám phá điều mới.',
+        traitsEn: 'Optimistic, imaginative, enthusiastic, and curious to explore new perspectives.',
+        strengthsVi: 'Sáng tạo nội dung, kể chuyện (storytelling), thuyết phục và lan tỏa thông điệp tích cực.',
+        strengthsEn: 'Creative ideation, storytelling, persuasion, and spreading positive impact.',
+        fieldsVi: 'Truyền thông quốc tế, Hợp tác & Quảng bá văn hóa • Nghề nghiệp: Chuyên viên nội dung, Marketing quốc tế, Truyền thông thương hiệu.',
+        fieldsEn: 'International Media, Cultural Promotion • Careers: Content Strategist, Global Marketing, Brand Communications.',
+        skillsVi: 'Kể chuyện đa phương tiện, nghiên cứu công chúng mục tiêu và lập kế hoạch truyền thông.',
+        skillsEn: 'Multimedia storytelling, audience research, and strategic communication planning.',
+      },
+      green: {
+        id: 'green',
+        color: '#16A34A',
+        gradient: 'linear-gradient(135deg, #16A34A 0%, #166534 100%)',
+        nameVi: 'Gen Xanh lá – Người kiến tạo',
+        nameEn: 'Green Gene – The Builder',
+        taglineVi: '“Kiên nhẫn, thấu cảm và luôn hướng trái tim về những giá trị bền vững cho cộng đồng.”',
+        taglineEn: '“Patient, empathetic, and dedicated to creating sustainable value for communities.”',
+        traitsVi: 'Kiên nhẫn, đồng cảm sâu sắc, có tinh thần trách nhiệm cao và thích hỗ trợ cộng đồng.',
+        traitsEn: 'Patient, deeply empathetic, responsible, and passionate about helping communities.',
+        strengthsVi: 'Lắng nghe thấu hiểu, hợp tác bền bỉ, kết nối nguồn lực và giải quyết vấn đề xã hội.',
+        strengthsEn: 'Active listening, steady collaboration, resource coordination, and social problem-solving.',
+        fieldsVi: 'Tổ chức quốc tế & Phát triển bền vững • Nghề nghiệp: Nhân viên dự án NGO, Chuyên viên phát triển cộng đồng, Điều phối viên dự án quốc tế.',
+        fieldsEn: 'International Organizations & Development • Careers: NGO Project Officer, Community Development Specialist, International Coordinator.',
+        skillsVi: 'Quản lý dự án phát triển, làm việc nhóm đa bên và phân tích tác động xã hội.',
+        skillsEn: 'Development project management, multi-stakeholder teamwork, and social impact analysis.',
+      },
+      blue: {
+        id: 'blue',
+        color: '#2563EB',
+        gradient: 'linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)',
+        nameVi: 'Gen Xanh dương – Người phân tích',
+        nameEn: 'Blue Gene – The Analyst',
+        taglineVi: '“Logic, điềm tĩnh và sắc bén khi bóc tách bản chất của các vấn đề toàn cầu.”',
+        taglineEn: '“Logical, composed, and sharp at dissecting the root causes of global issues.”',
+        traitsVi: 'Logic, cẩn thận, khách quan, điềm tĩnh và luôn muốn tìm hiểu tận cùng bản chất vấn đề.',
+        traitsEn: 'Logical, meticulous, objective, composed, and driven to uncover root causes.',
+        strengthsVi: 'Nghiên cứu chuyên sâu, phân tích dữ liệu, tư duy phản biện và lập luận chặt chẽ.',
+        strengthsEn: 'In-depth research, data analysis, critical thinking, and structured argumentation.',
+        fieldsVi: 'Luật quốc tế, Kinh tế quốc tế, Nghiên cứu chính sách • Nghề nghiệp: Chuyên viên nghiên cứu, Phân tích chính sách, Chuyên viên pháp chế quốc tế.',
+        fieldsEn: 'International Law, International Economics, Policy Research • Careers: Policy Analyst, Researcher, International Legal Specialist.',
+        skillsVi: 'Phương pháp nghiên cứu, viết báo cáo chuyên sâu, phân tích dữ liệu và tư duy pháp lý.',
+        skillsEn: 'Research methodology, policy report writing, data analytics, and legal reasoning.',
+      },
+      purple: {
+        id: 'purple',
+        color: '#7C3AED',
+        gradient: 'linear-gradient(135deg, #7C3AED 0%, #4C1D95 100%)',
+        nameVi: 'Gen Tím – Người sáng tạo chiến lược',
+        nameEn: 'Purple Gene – The Strategist',
+        taglineVi: '“Tầm nhìn đa chiều, độc lập và nhạy bén đón đầu những xu hướng chuyển dịch của thế giới.”',
+        taglineEn: '“Multidimensional vision, independent mindset, and foresight for global shifts.”',
+        traitsVi: 'Độc lập, có tầm nhìn xa, thích đổi mới và luôn nhìn nhận vấn đề từ nhiều chiều cạnh.',
+        traitsEn: 'Independent, visionary, innovative, and inclined to view issues multidimensionally.',
+        strengthsVi: 'Hoạch định chiến lược, tư duy hệ thống, kết nối liên ngành và dự đoán xu hướng.',
+        strengthsEn: 'Strategic planning, systems thinking, interdisciplinary synthesis, and trend forecasting.',
+        fieldsVi: 'Hoạch định chiến lược toàn cầu, Kinh tế & Truyền thông quốc tế • Nghề nghiệp: Chuyên viên hoạch định chiến lược, Tư vấn quốc tế, Phân tích xu hướng.',
+        fieldsEn: 'Global Strategy, International Economics & Media • Careers: Strategic Planner, International Consultant, Trend Analyst.',
+        skillsVi: 'Tư duy hệ thống, giải quyết vấn đề phức hợp, ngoại ngữ và thích nghi linh hoạt.',
+        skillsEn: 'Systems thinking, complex problem-solving, foreign languages, and adaptive agility.',
+      },
+    };
+
+    /* 8 Câu hỏi khảo sát tình huống Quan hệ quốc tế & Truyền thông quốc tế */
+    const QUESTIONS = [
+      {
+        tagVi: 'Tình huống 01 · Phản ứng trước biến động',
+        tagEn: 'Scenario 01 · Responding to Shifts',
+        textVi: 'Khi một sự kiện quốc tế lớn bất ngờ nổ ra và tác động đến dự án của nhóm, phản xạ đầu tiên của bạn là gì?',
+        textEn: 'When a major international event suddenly unfolds and impacts your team project, what is your first instinct?',
+        options: [
+          {
+            textVi: 'Đứng ra phân công lại vai trò, chốt phương án hành động nhanh để cả nhóm giữ vững nhịp độ.',
+            textEn: 'Step up to reassign roles and lock in an action plan so the team keeps momentum.',
+            scores: { red: 3, purple: 1 },
+          },
+          {
+            textVi: 'Thu thập số liệu, đối chiếu nguồn tin đa chiều để đánh giá chính xác mức độ tác động trước.',
+            textEn: 'Gather data and cross-check credible sources to accurately assess the impact first.',
+            scores: { blue: 3, purple: 1 },
+          },
+          {
+            textVi: 'Kết nối ngay với các thành viên và đối tác liên quan để trấn an tinh thần và trao đổi thông tin.',
+            textEn: 'Reach out immediately to teammates and partners to align everyone and keep morale high.',
+            scores: { orange: 3, green: 1 },
+          },
+          {
+            textVi: 'Nhìn nhận bức tranh tổng thể để tìm ra hướng tiếp cận mới mẻ, biến thách thức thành điểm nhấn.',
+            textEn: 'Look at the bigger picture to find an innovative angle that turns the challenge into an opportunity.',
+            scores: { purple: 3, yellow: 1 },
+          },
+        ],
+      },
+      {
+        tagVi: 'Tình huống 02 · Vai trò trong triển lãm quốc tế',
+        tagEn: 'Scenario 02 · Role in an International Exhibition',
+        textVi: 'Nếu cùng lớp tổ chức một triển lãm giao lưu văn hóa & đối ngoại tại HUFLIT, bạn hào hứng nhất với vị trí nào?',
+        textEn: 'If your class organizes a cultural & diplomatic exhibition at HUFLIT, which role excites you most?',
+        options: [
+          {
+            textVi: 'Lên ý tưởng chủ đề, viết câu chuyện truyền thông và thiết kế thông điệp thu hút người xem.',
+            textEn: 'Brainstorm the theme, craft compelling stories, and design messages that captivate visitors.',
+            scores: { yellow: 3, orange: 1 },
+          },
+          {
+            textVi: 'Trực tiếp đón tiếp khách mời, dẫn tour triển lãm và tạo không khí cởi mở cho người tham gia.',
+            textEn: 'Welcome guests, host exhibition tours, and create a warm, engaging atmosphere.',
+            scores: { orange: 3, yellow: 1 },
+          },
+          {
+            textVi: 'Điều phối hậu cần, chăm lo trải nghiệm từng khu vực và hỗ trợ các bạn gặp khó khăn.',
+            textEn: 'Coordinate logistics, care for visitor experience, and support teammates wherever needed.',
+            scores: { green: 3, blue: 1 },
+          },
+          {
+            textVi: 'Làm trưởng ban điều hành chung, đại diện nhóm phát biểu và xử lý các tình huống phát sinh.',
+            textEn: 'Serve as overall project lead, represent the team, and handle unexpected situations.',
+            scores: { red: 3, orange: 1 },
+          },
+        ],
+      },
+      {
+        tagVi: 'Tình huống 03 · Góc nhìn về ngành Quan hệ quốc tế',
+        tagEn: 'Scenario 03 · Perspective on International Relations',
+        textVi: 'Điều gì ở lĩnh vực Quan hệ quốc tế khiến bạn cảm thấy cuốn hút và muốn tìm hiểu sâu nhất?',
+        textEn: 'What aspect of International Relations fascinates you most and makes you want to dive deeper?',
+        options: [
+          {
+            textVi: 'Nghệ thuật thương lượng, đàm phán song phương – đa phương và bản lĩnh bảo vệ lập trường.',
+            textEn: 'The art of bilateral/multilateral negotiation and standing firm on key positions.',
+            scores: { red: 3, blue: 1 },
+          },
+          {
+            textVi: 'Các hiệp định thương mại, luật pháp quốc tế và logic vận hành của trật tự kinh tế toàn cầu.',
+            textEn: 'Trade agreements, international law, and the underlying logic of global economic order.',
+            scores: { blue: 3, purple: 1 },
+          },
+          {
+            textVi: 'Các dự án phát triển bền vững, viện trợ nhân đạo và nỗ lực thu hẹp bất bình đẳng xã hội.',
+            textEn: 'Sustainable development projects, humanitarian aid, and efforts to reduce social inequality.',
+            scores: { green: 3, yellow: 1 },
+          },
+          {
+            textVi: 'Sức mạnh mềm văn hóa, truyền thông xuyên biên giới và cách định hình hình ảnh quốc gia.',
+            textEn: 'Cultural soft power, cross-border media, and shaping national narratives.',
+            scores: { yellow: 3, orange: 1 },
+          },
+        ],
+      },
+      {
+        tagVi: 'Tình huống 04 · Làm việc trong nhóm đa văn hóa',
+        tagEn: 'Scenario 04 · Working in a Multicultural Team',
+        textVi: 'Khi làm việc nhóm với những người có quan điểm và phong cách rất khác nhau, bạn thường đóng góp theo cách nào?',
+        textEn: 'When collaborating with people who hold very different views and styles, how do you usually contribute?',
+        options: [
+          {
+            textVi: 'Lắng nghe kiên nhẫn từng góc nhìn, dung hòa mâu thuẫn để mọi người cảm thấy được tôn trọng.',
+            textEn: 'Listen patiently to every perspective and mediate tensions so everyone feels respected.',
+            scores: { green: 3, orange: 1 },
+          },
+          {
+            textVi: 'Tổng hợp các ý kiến rời rạc thành một lộ trình chiến lược rõ ràng, có trước có sau.',
+            textEn: 'Synthesize scattered ideas into a clear, structured strategic roadmap.',
+            scores: { purple: 3, blue: 1 },
+          },
+          {
+            textVi: 'Khuấy động bầu không khí tích cực, khích lệ mọi người mạnh dạn chia sẻ ý tưởng táo bạo.',
+            textEn: 'Bring positive energy and encourage everyone to share bold, creative ideas.',
+            scores: { yellow: 3, orange: 1 },
+          },
+          {
+            textVi: 'Đặt câu hỏi phản biện sắc bén để kiểm tra tính khả thi và lường trước rủi ro của từng phương án.',
+            textEn: 'Ask sharp critical questions to test feasibility and anticipate risks in each option.',
+            scores: { blue: 3, red: 1 },
+          },
+        ],
+      },
+      {
+        tagVi: 'Tình huống 05 · Thế mạnh tự nhiên được bạn bè công nhận',
+        tagEn: 'Scenario 05 · Natural Strength Recognized by Peers',
+        textVi: 'Bạn bè xung quanh thường tìm đến bạn nhất khi họ cần điều gì?',
+        textEn: 'What do friends and teammates most often come to you for?',
+        options: [
+          {
+            textVi: 'Một lời khuyên tỉnh táo, phân tích thiệt – hơn rõ ràng trước một quyết định quan trọng.',
+            textEn: 'A calm, objective breakdown of pros and cons before an important decision.',
+            scores: { blue: 3, purple: 1 },
+          },
+          {
+            textVi: 'Sự lắng nghe chân thành, đồng hành kiên nhẫn những lúc họ áp lực hoặc cần người sẻ chia.',
+            textEn: 'Sincere listening and patient support when they feel overwhelmed.',
+            scores: { green: 3, orange: 1 },
+          },
+          {
+            textVi: 'Một người dẫn dắt quyết đoán giúp gỡ rối bế tắc và thúc đẩy cả nhóm tiến lên.',
+            textEn: 'A decisive leader who breaks deadlocks and pushes the whole team forward.',
+            scores: { red: 3, purple: 1 },
+          },
+          {
+            textVi: 'Ý tưởng sáng tạo mới lạ hoặc cách diễn đạt truyền cảm hứng cho bài thuyết trình/dự án.',
+            textEn: 'Fresh creative concepts or inspiring ways to frame a presentation or campaign.',
+            scores: { yellow: 3, purple: 1 },
+          },
+        ],
+      },
+      {
+        tagVi: 'Tình huống 06 · Tiếp cận một vấn đề toàn cầu',
+        tagEn: 'Scenario 06 · Approaching a Global Issue',
+        textVi: 'Khi đọc một bản tin về biến đổi khí hậu hoặc chuyển đổi số toàn cầu, điều gì nảy ra trong đầu bạn đầu tiên?',
+        textEn: 'When reading news about climate change or global digital transformation, what comes to mind first?',
+        options: [
+          {
+            textVi: 'Xu hướng này sẽ thay đổi cục diện thế giới trong 5–10 năm tới như thế nào?',
+            textEn: 'How will this trend reshape the global landscape over the next 5–10 years?',
+            scores: { purple: 3, blue: 1 },
+          },
+          {
+            textVi: 'Làm sao để truyền tải câu chuyện này thật chạm để giới trẻ quan tâm và hành động?',
+            textEn: 'How can we tell this story powerfully so young people care and take action?',
+            scores: { yellow: 3, orange: 1 },
+          },
+          {
+            textVi: 'Những cộng đồng yếu thế nào đang chịu ảnh hưởng và các tổ chức NGO có thể hỗ trợ gì?',
+            textEn: 'Which vulnerable communities are affected and how can NGOs support them?',
+            scores: { green: 3, red: 1 },
+          },
+          {
+            textVi: 'Các quốc gia cần cơ chế đàm phán và cam kết chính sách nào để giải quyết tận gốc?',
+            textEn: 'What negotiation frameworks and policy commitments do nations need to solve this?',
+            scores: { red: 3, blue: 1 },
+          },
+        ],
+      },
+      {
+        tagVi: 'Tình huống 07 · Môi trường làm việc lý tưởng',
+        tagEn: 'Scenario 07 · Ideal Work Environment',
+        textVi: 'Sau khi tốt nghiệp ngành Quan hệ quốc tế, môi trường làm việc nào khiến bạn thấy mình phát huy tốt nhất?',
+        textEn: 'After graduating in International Relations, which environment brings out your best?',
+        options: [
+          {
+            textVi: 'Môi trường năng động, gặp gỡ nhiều đối tác quốc tế, tổ chức sự kiện và giao lưu văn hóa.',
+            textEn: 'A dynamic environment meeting global partners, hosting events, and bridging cultures.',
+            scores: { orange: 3, yellow: 1 },
+          },
+          {
+            textVi: 'Viện nghiên cứu, tổ chức tư vấn chính sách hoặc bộ phận phân tích chiến lược doanh nghiệp.',
+            textEn: 'A think tank, policy institute, or corporate strategic analysis division.',
+            scores: { blue: 2, purple: 2 },
+          },
+          {
+            textVi: 'Cơ quan đối ngoại, tổ chức đa phương nơi đòi hỏi bản lĩnh thương lượng và điều hành.',
+            textEn: 'A diplomatic agency or multilateral body requiring strong negotiation and leadership.',
+            scores: { red: 3, orange: 1 },
+          },
+          {
+            textVi: 'Tổ chức phi chính phủ (NGO), dự án phát triển cộng đồng và hợp tác quốc tế bền vững.',
+            textEn: 'An NGO, community development project, or sustainable international cooperation program.',
+            scores: { green: 3, purple: 1 },
+          },
+        ],
+      },
+      {
+        tagVi: 'Tình huống 08 · Dấu ấn bạn muốn để lại',
+        tagEn: 'Scenario 08 · The Mark You Wish to Leave',
+        textVi: 'Nếu được mô tả bản sắc của mình bằng một hình ảnh trong hành trình hội nhập, bạn chọn điều gì?',
+        textEn: 'If you could describe your identity in the journey of global integration with one image, what would it be?',
+        options: [
+          {
+            textVi: 'Ngọn hải đăng định hướng – vững vàng dẫn lối và dám chịu trách nhiệm trước sóng gió.',
+            textEn: 'A guiding lighthouse – steady at the helm and courageous through turbulent waves.',
+            scores: { red: 2, purple: 2 },
+          },
+          {
+            textVi: 'Nhịp cầu kết nối – mở rộng vòng tay gắn kết những con người và nền văn hóa khác biệt.',
+            textEn: 'A connecting bridge – bringing diverse people and cultures closer together.',
+            scores: { orange: 2, green: 2 },
+          },
+          {
+            textVi: 'Tia nắng lan tỏa – thắp lên cảm hứng, sự lạc quan và những câu chuyện đầy sức sống.',
+            textEn: 'A ray of sunlight – sparking inspiration, optimism, and vibrant stories.',
+            scores: { yellow: 3, orange: 1 },
+          },
+          {
+            textVi: 'Chiếc la bàn chuẩn xác – soi chiếu bản chất sự việc bằng tri thức, chiều sâu và tầm nhìn.',
+            textEn: 'A precise compass – illuminating truth through knowledge, depth, and foresight.',
+            scores: { blue: 2, purple: 2 },
+          },
+        ],
+      },
+    ];
+
+    /* 50 Thông điệp động lực, an ủi & kết nối với "tia" IR DNA */
+    const MESSAGES_50 = [
+      { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Trong chuỗi xoắn IR DNA của riêng bạn, mỗi “tia” tính cách đều đang âm thầm tạo nên một bản sắc Quan hệ quốc tế không thể thay thế.' },
+      { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Không có mã gen nào là “đẹp nhất” – chính cách các tia màu trong bạn đan cài mới làm nên dấu ấn độc nhất.' },
+      { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Có thể bạn không chỉ mang một màu gen duy nhất; bạn là sự giao thoa thú vị giữa nhiều tia năng lực đang chờ được gọi tên.' },
+      { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Khi bạn băn khoăn mình thuộc về đâu, hãy nhìn lại những “tia” khiến mắt bạn sáng lên mỗi khi nhắc đến thế giới rộng lớn ngoài kia.' },
+      { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Giải mã IR DNA không phải để đóng khung bạn vào một nhãn dán, mà để thắp sáng những tia thế mạnh bạn vốn đã có.' },
+      { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Mỗi đường nối trong chuỗi DNA đều cần điểm tựa – những ngày chênh vênh chỉ là lúc bạn đang sắp xếp lại các mảnh ghép của chính mình.' },
+      { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Đừng lo nếu tia màu của bạn trầm lắng hơn người khác; trong bức tranh đa sắc của Quan hệ quốc tế, gam màu nào cũng giữ một nhịp điệu riêng.' },
+      { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Bản sắc WHO WE ARE bắt đầu từ khoảnh khắc bạn ngừng cố giống ai đó và tự hào gọi tên màu gen thật sự của mình.' },
+      { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Một tia tò mò nhỏ về thế giới hôm nay có thể chính là khởi đầu cho cả một hành trình đối ngoại mai sau.' },
+      { catVi: 'Chuỗi xoắn IR DNA & Bản sắc', catEn: 'IR DNA & Identity', text: 'Bạn không cần phải rực rỡ theo cách của tất cả mọi người – chỉ cần tỏa sáng đúng với tần số màu sắc của riêng bạn.' },
+
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Nếu bạn mang tia Gen Đỏ, sự quyết đoán và bản lĩnh dẫn dắt của bạn chính là điểm tựa vững vàng giữa những bàn đàm phán nhiều biến động.' },
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Nếu trong bạn có tia Gen Cam, khả năng kết nối và sưởi ấm những cuộc trò chuyện chính là cây cầu đẹp nhất nối các nền văn hóa lại với nhau.' },
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Nếu bạn mang tia Gen Vàng, nguồn năng lượng lạc quan và cách kể chuyện sáng tạo của bạn có thể truyền cảm hứng đi xa hơn bạn tưởng.' },
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Nếu bạn mang tia Gen Xanh lá, sự kiên nhẫn, lắng nghe và trái tim hướng về cộng đồng của bạn chính là nền móng cho những thay đổi bền vững.' },
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Nếu trong bạn có tia Gen Xanh dương, tư duy logic và sự điềm tĩnh phân tích bản chất vấn đề là “la bàn” cực kỳ quý giá giữa dòng thông tin hỗn loạn.' },
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Nếu bạn mang tia Gen Tím, tầm nhìn đa chiều và khả năng nhìn thấy xu hướng từ sớm sẽ đưa bạn đến những giải pháp không ai ngờ tới.' },
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Đôi khi ưu điểm lớn nhất của bạn nằm ở chính “tia gen” mà bạn từng nghĩ là quá đỗi bình thường.' },
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Có người sinh ra để đứng mũi chịu sào trên bàn đàm phán, có người lại tỏa sáng khi âm thầm phân tích dữ liệu – cả hai đều là mắt xích không thể thiếu của IR DNA.' },
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Đừng tự ti vì mình không ồn ào như Gen Cam hay quyết liệt như Gen Đỏ; chiều sâu của Gen Xanh dương hay sự bền bỉ của Gen Xanh lá cũng tạo nên sức mạnh riêng.' },
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Khi nhiều mã gen khác màu đứng cạnh nhau, sự khác biệt không chia rẽ chúng ta mà bù đắp cho những khoảng trống còn thiếu.' },
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Thế mạnh của bạn không cần phải giống bất kỳ khuôn mẫu sinh viên Quan hệ quốc tế nào – chính sự khác biệt của bạn làm ngành học này sống động hơn.' },
+      { catVi: '6 Mã Gen & Thế mạnh riêng', catEn: '6 Color Genes & Strengths', text: 'Hãy thử nuôi dưỡng thêm một “tia màu” phụ bên cạnh màu gen chủ đạo, bạn sẽ bất ngờ với phiên bản linh hoạt của chính mình.' },
+
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Giữa 5 ngã rẽ của IR DNA – Ngoại giao, Kinh tế quốc tế, Luật quốc tế, Truyền thông quốc tế hay Tổ chức quốc tế & Phát triển – hướng đi nào cũng cần một trái tim đủ nhiệt thành.' },
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Chưa chốt được mình hợp Ngoại giao hay Truyền thông quốc tế lúc này không sao cả – tuổi trẻ là hành trình thử từng tia sáng để tìm ra vùng trời thuộc về mình.' },
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Lựa chọn một lĩnh vực hôm nay không khóa chặt những cánh cửa khác; mọi kiến thức quốc tế đều có những điểm giao thoa bất ngờ.' },
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Nếu bạn yêu những câu chữ và sức mạnh lan tỏa hình ảnh, Truyền thông quốc tế luôn có một khoảng trời rộng cho tia sáng của bạn.' },
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Nếu bạn thích sự chặt chẽ của nguyên tắc và công lý toàn cầu, Luật quốc tế và Kinh tế quốc tế sẽ là nơi tư duy sắc bén của bạn lên tiếng.' },
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Nếu bạn mong muốn những giá trị thiết thực chạm đến con người, các Tổ chức quốc tế & Dự án phát triển đang chờ đôi tay kiến tạo của bạn.' },
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Không có lựa chọn nghề nghiệp nào là “ngõ cụt” nếu bạn mang theo sự tò mò, ngoại ngữ và tư duy mở của một người làm Quan hệ quốc tế.' },
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Đôi khi bạn không chọn lĩnh vực – chính những trải nghiệm, những lần thử sức và những cuộc đối thoại sẽ dẫn bạn đến đúng nơi mình thuộc về.' },
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Đứng trước nhiều lựa chọn chỉ chứng tỏ bạn có nhiều tiềm năng hơn một khuôn mẫu cố định.' },
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Mỗi kỹ năng nhỏ bạn rèn hôm nay đều đang âm thầm chuẩn bị hành trang cho ngày bạn bước ra sân chơi toàn cầu.' },
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Hãy chọn hướng đi khiến bạn sẵn sàng kiên nhẫn học hỏi ngay cả những ngày chưa thấy kết quả ngay lập tức.' },
+      { catVi: 'Lựa chọn & 5 Lĩnh vực IR DNA', catEn: 'Choices & 5 IR Fields', text: 'Hành trình tìm nghề cũng giống như giải mã DNA: càng kiên nhẫn quan sát bản thân, bức tranh tương lai càng hiện lên rõ nét.' },
+
+      { catVi: 'An ủi & Tiếp sức từ Trạm IR DNA', catEn: 'Comfort & Encouragement', text: 'Nếu hôm nay bạn thấy hơi mệt vì những áp lực bài vở hay định hướng, hãy dừng lại ở trạm IR DNA này một chút – thở chậm lại, bạn đang làm tốt hơn bạn nghĩ đấy.' },
+      { catVi: 'An ủi & Tiếp sức từ Trạm IR DNA', catEn: 'Comfort & Encouragement', text: 'Không sao cả nếu hôm nay bạn chưa trả lời được câu hỏi “Mình sẽ trở thành ai?” – chỉ cần bạn vẫn đang bước đi và không ngừng khám phá.' },
+      { catVi: 'An ủi & Tiếp sức từ Trạm IR DNA', catEn: 'Comfort & Encouragement', text: 'Những ngày chênh vênh trước ngưỡng cửa tương lai chỉ là dấu hiệu cho thấy chuỗi DNA trong bạn đang lớn lên để chạm tới tầm nhìn rộng hơn.' },
+      { catVi: 'An ủi & Tiếp sức từ Trạm IR DNA', catEn: 'Comfort & Encouragement', text: 'Đừng khắt khe với bản thân khi thấy bạn bè đã tìm được màu sắc rõ nét; mỗi mã gen đều có thời điểm chín muồi riêng.' },
+      { catVi: 'An ủi & Tiếp sức từ Trạm IR DNA', catEn: 'Comfort & Encouragement', text: 'Cảm ơn bạn đã ghé qua không gian triển lãm của chúng mình và để lại một dấu ấn thật đẹp trong bức tranh cộng đồng Quan hệ quốc tế.' },
+      { catVi: 'An ủi & Tiếp sức từ Trạm IR DNA', catEn: 'Comfort & Encouragement', text: 'Dù ngoài kia thế giới có biến động thế nào, mong bạn luôn giữ được một góc bình yên để lắng nghe tiếng nói bên trong mình.' },
+      { catVi: 'An ủi & Tiếp sức từ Trạm IR DNA', catEn: 'Comfort & Encouragement', text: 'Một bước chậm lại hôm nay không làm bạn tụt hậu – nó giúp bạn nạp lại năng lượng để đường bay phía trước vững vàng hơn.' },
+      { catVi: 'An ủi & Tiếp sức từ Trạm IR DNA', catEn: 'Comfort & Encouragement', text: 'Bạn không đi một mình trên hành trình này; xung quanh luôn có những mảnh ghép màu sắc khác sẵn sàng đồng hành và thấu hiểu bạn.' },
+
+      { catVi: 'Lời nhắn kết nối từ Nhóm Dự Án', catEn: 'From the IR DNA Team', text: 'Nhóm chúng mình gửi đến bạn một tia năng lượng nhỏ từ IR DNA: chúc bạn luôn tự tin với bản sắc riêng và không ngại bước ra thế giới!' },
+      { catVi: 'Lời nhắn kết nối từ Nhóm Dự Án', catEn: 'From the IR DNA Team', text: 'Từ IDENTITY – WHO WE ARE, mong thông điệp ngẫu nhiên này nhắc bạn nhớ rằng: sự hiện diện và góc nhìn của bạn luôn có ý nghĩa.' },
+      { catVi: 'Lời nhắn kết nối từ Nhóm Dự Án', catEn: 'From the IR DNA Team', text: 'Hãy mang “tia màu” bạn vừa khám phá hôm nay vào những cuộc đối thoại sắp tới – biết đâu bạn sẽ truyền cảm hứng cho một ai đó.' },
+      { catVi: 'Lời nhắn kết nối từ Nhóm Dự Án', catEn: 'From the IR DNA Team', text: 'Thế giới rộng lớn hơn khi ta dám kết nối bằng sự chân thành và tôn trọng những màu sắc khác với mình.' },
+      { catVi: 'Lời nhắn kết nối từ Nhóm Dự Án', catEn: 'From the IR DNA Team', text: 'Một cuộc gặp gỡ nhỏ ở triển lãm hôm nay có thể mở ra một tình bạn, một dự án hay một góc nhìn mới cho chặng đường đại học của bạn.' },
+      { catVi: 'Lời nhắn kết nối từ Nhóm Dự Án', catEn: 'From the IR DNA Team', text: 'Chúc cho hành trình sinh viên Quan hệ quốc tế của bạn luôn đầy ắp những trải nghiệm đáng nhớ, những người đồng đội ăn ý và những cột mốc tự hào.' },
+      { catVi: 'Lời nhắn kết nối từ Nhóm Dự Án', catEn: 'From the IR DNA Team', text: 'Giữ vững bản sắc, mở rộng tầm nhìn và tiếp tục viết nên câu chuyện IR DNA rực rỡ của riêng bạn nhé!' },
+      { catVi: 'Lời nhắn kết nối từ Nhóm Dự Án', catEn: 'From the IR DNA Team', text: 'Gửi bạn một cái ôm tinh thần từ đội ngũ thực hiện dự án IR DNA – Find Your Color: cứ rực rỡ theo cách của bạn, vì chính bạn làm nên sức mạnh kết nối của cộng đồng chúng ta!' },
+    ];
+
+    /* =========================================================================
+       2. TRẠNG THÁI ỨNG DỤNG (STATE)
+    ========================================================================= */
+    let currentLang = 'vi';
+    let studentName = '';
+    let studentId = '';
+    let studentEmail = '';
+    let emailConfirmed = false;
+    let currentQuestionIndex = 0;
+    let userAnswers = new Array(QUESTIONS.length).fill(null);
+    let currentMessageIndex = 0;
+    let latestResultSummary = null;
+
+    const DEFAULT_WALL_NOTES = [
+      {
+        author: 'Minh Thư · Gen Cam',
+        color: '#E67E22',
+        text: 'Mình muốn rèn thêm giao tiếp liên văn hóa để tự tin tham gia các diễn đàn thanh niên ASEAN!',
+      },
+      {
+        author: 'Hoàng Nam · Gen Xanh dương',
+        color: '#2563EB',
+        text: 'Rất thích cách IR DNA gọi tên thế mạnh phân tích và nghiên cứu chính sách quốc tế của tụi mình.',
+      },
+      {
+        author: 'Thanh Trúc · Gen Xanh lá',
+        color: '#16A34A',
+        text: 'Hy vọng sau này sẽ được góp sức cho các dự án NGO phát triển cộng đồng bền vững.',
+      },
+      {
+        author: 'Gia Bảo · Gen Đỏ',
+        color: '#D9383A',
+        text: 'Mỗi người một màu sắc nhưng ghép lại thành bức tranh HUFLIT IR siêu gắn kết!',
+      },
+    ];
+
+    /* =========================================================================
+       3. CHUYỂN ĐỔI NGÔN NGỮ VI / EN & DARK / LIGHT MODE
+    ========================================================================= */
+    function setLanguage(lang) {
+      currentLang = lang;
+      const viBtn = document.getElementById('langViBtn');
+      const enBtn = document.getElementById('langEnBtn');
+
+      if (lang === 'vi') {
+        viBtn.className = 'px-2.5 py-1 rounded-full text-xs font-bold transition-all bg-[#132238] text-white dark:bg-sky-500 dark:text-slate-950';
+        enBtn.className = 'px-2.5 py-1 rounded-full text-xs font-bold transition-all text-[#132238]/60 dark:text-slate-400 hover:text-[#132238] dark:hover:text-white';
+      } else {
+        enBtn.className = 'px-2.5 py-1 rounded-full text-xs font-bold transition-all bg-[#132238] text-white dark:bg-sky-500 dark:text-slate-950';
+        viBtn.className = 'px-2.5 py-1 rounded-full text-xs font-bold transition-all text-[#132238]/60 dark:text-slate-400 hover:text-[#132238] dark:hover:text-white';
+      }
+
+      applyTranslations();
+      if (!document.getElementById('screenQuiz').classList.contains('hidden')) {
+        renderQuestion();
+      }
+      if (!document.getElementById('screenResult').classList.contains('hidden') && latestResultSummary) {
+        renderResultScreen(latestResultSummary);
+      }
+    }
+
+    function applyTranslations() {
+      const isVi = currentLang === 'vi';
+      document.getElementById('headerSubtitle').textContent = isVi ? 'TRẠM 2 · FIND YOUR COLOR' : 'STATION 2 · FIND YOUR COLOR';
+      document.getElementById('heroEyebrow').textContent = isVi ? 'GIẢI MÃ BẢN SẮC CỦA BẠN' : 'DECODE YOUR IDENTITY';
+      document.getElementById('heroTitle').innerHTML = isVi
+        ? 'Tìm màu sắc <br class="sm:hidden" /><span class="text-[#1E40AF] dark:text-sky-400">trong bạn.</span>'
+        : 'Find the color <br class="sm:hidden" /><span class="text-[#1E40AF] dark:text-sky-400">within you.</span>';
+      document.getElementById('heroDesc').innerHTML = isVi
+        ? 'Mỗi người đều mang trong mình một gam màu riêng biệt – từ bản lĩnh đàm phán, sự nhạy bén đa văn hóa đến tư duy kết nối không biên giới. Bắt đầu hành trình giải mã <strong class="font-semibold text-[#132238] dark:text-white">IR DNA</strong> để chạm tới màu sắc thật sự của bạn.'
+        : 'Everyone carries a distinct hue within – from negotiation poise and cross-cultural agility to borderless connection. Begin your <strong class="font-semibold text-[#132238] dark:text-white">IR DNA</strong> decoding journey to discover your true color.';
+
+      document.getElementById('checkinTitle').textContent = isVi ? 'Bắt đầu khám phá' : 'Start Exploring';
+      document.getElementById('checkinSub').textContent = isVi
+        ? 'Nhập thông tin sinh viên hoặc chọn chế độ trải nghiệm nhanh để tiếp tục.'
+        : 'Enter your student ID or use quick demo mode to begin.';
+      document.getElementById('labelName').innerHTML = isVi
+        ? 'Họ và tên / Biệt danh <span class="font-normal text-[#132238]/50 dark:text-slate-400">(không bắt buộc)</span>'
+        : 'Full Name / Nickname <span class="font-normal text-[#132238]/50 dark:text-slate-400">(optional)</span>';
+      document.getElementById('studentName').placeholder = isVi ? 'Ví dụ: Minh Anh' : 'e.g., Alex Nguyen';
+      document.getElementById('labelId').innerHTML = isVi
+        ? 'Mã số sinh viên <span class="text-[#C0392B]">*</span>'
+        : 'Student ID <span class="text-[#C0392B]">*</span>';
+      document.getElementById('demoFillBtn').textContent = isVi ? 'Dùng mã trải nghiệm nhanh →' : 'Use quick demo ID →';
+      document.getElementById('studentId').placeholder = isVi ? 'Nhập mã số sinh viên (VD: 22DH710001)' : 'Enter student ID (e.g., 22DH710001)';
+      document.getElementById('labelEmail').innerHTML = isVi
+        ? 'Email nhận kết quả IR DNA <span class="font-normal text-[#132238]/50 dark:text-slate-400">(khuyến nghị để gửi hồ sơ)</span>'
+        : 'Email to receive IR DNA result <span class="font-normal text-[#132238]/50 dark:text-slate-400">(recommended for delivery)</span>';
+      document.getElementById('studentEmail').placeholder = isVi
+        ? 'Ví dụ: mssv@st.huflit.edu.vn hoặc email cá nhân'
+        : 'e.g., id@st.huflit.edu.vn or personal email';
+      document.getElementById('startBtnText').textContent = isVi ? 'Tiếp tục' : 'Continue';
+      document.getElementById('geneStripLabel').textContent = isVi
+        ? '6 Mã Gen Bản Sắc Trong Triển Lãm IR DNA'
+        : '6 Identity Color Genes in IR DNA Exhibition';
+
+      document.getElementById('prevBtnText').textContent = isVi ? 'Quay lại' : 'Back';
+      document.getElementById('quizHintText').textContent = isVi
+        ? 'Chọn một phương án phản ánh tự nhiên nhất cách bạn phản ứng.'
+        : 'Choose the option that most naturally reflects your response.';
+
+      document.getElementById('emailNoticeTitle').textContent = isVi
+        ? 'Đã ghi nhận bài khảo sát – Kết quả IR DNA sẽ được gửi qua email!'
+        : 'Survey Recorded – Your IR DNA Result Will Be Sent via Email!';
+      document.getElementById('emailNoticeDesc').innerHTML = isVi
+        ? 'Để giữ trọn vẹn trải nghiệm bất ngờ và hoàn thiện hồ sơ bản sắc riêng, nhóm <strong>IR DNA</strong> không hiển thị kết quả chi tiết ngay tại màn hình này mà sẽ gửi hồ sơ giải mã 6 mã gen màu sắc trực tiếp tới email của bạn.'
+        : 'To preserve a thoughtful reveal and tailor your identity profile, the <strong>IR DNA</strong> team does not show the detailed breakdown immediately on screen—your full 6-color gene profile will be sent directly to your email.';
+      document.getElementById('confirmEmailLabel').textContent = isVi
+        ? 'Địa chỉ email nhận hồ sơ IR DNA của bạn:'
+        : 'Email address to receive your IR DNA profile:';
+      document.getElementById('confirmEmailInput').placeholder = isVi
+        ? 'Nhập email sinh viên HUFLIT hoặc email cá nhân để nhận kết quả'
+        : 'Enter your HUFLIT student email or personal email';
+      document.getElementById('confirmEmailBtn').textContent = isVi ? 'Xác nhận gửi mail' : 'Confirm Email';
+      document.getElementById('hiddenResultNote').textContent = isVi
+        ? '* Kết quả chi tiết được ẩn ngay sau khảo sát và gửi riêng qua email cho từng người tham gia.'
+        : '* Detailed results are hidden immediately after the survey and delivered individually via email.';
+      document.getElementById('retakeBtnText').textContent = isVi ? 'Làm lại khảo sát' : 'Retake Survey';
+      document.getElementById('thankYouHeading').textContent = isVi
+        ? 'Cảm ơn bạn đã đồng hành cùng IR DNA!'
+        : 'Thank you for joining IR DNA!';
+      document.getElementById('thankYouBody').innerHTML = isVi
+        ? 'Cảm ơn bạn đã dành thời gian tham gia khảo sát và chia sẻ dấu ấn bản sắc cùng <strong>IR DNA – Find Your Color</strong>; mỗi câu trả lời của bạn là một mảnh ghép quý giá giúp bức tranh cộng đồng Quan hệ quốc tế của chúng mình thêm trọn vẹn và đa sắc!'
+        : 'Thank you for taking the survey and sharing your identity mark with <strong>IR DNA – Find Your Color</strong>; every response is a precious piece enriching our International Relations community!';
+      document.getElementById('capsuleEyebrow').textContent = isVi
+        ? '✨ TRẠM TIẾP SỨC TINH THẦN · 50 TIA THÔNG ĐIỆP'
+        : '✨ SPIRITUAL BOOST STATION · 50 MESSAGE RAYS';
+      document.getElementById('capsuleTitle').textContent = isVi
+        ? 'Nhận một “tia” thông điệp dành riêng cho bạn'
+        : 'Receive a “Ray” Message Just for You';
+      document.getElementById('capsuleSub').textContent = isVi
+        ? 'Một lời nhắn nhỏ về lựa chọn, ưu điểm, nghề nghiệp hoặc sự an ủi nhẹ nhàng gửi từ đội ngũ IR DNA.'
+        : 'A gentle note on choices, strengths, careers, or comfort from the IR DNA team.';
+      document.getElementById('drawMsgBtn').textContent = isVi
+        ? '🎲 Rút tia thông điệp mới'
+        : '🎲 Draw Another Ray';
+      document.getElementById('copyBtnLabel').textContent = isVi
+        ? 'Sao chép thông điệp'
+        : 'Copy Message';
+      updateEmailStatusUI();
+      updateMessageDisplay();
+      document.getElementById('keepsakeEyebrow').textContent = isVi
+        ? '🕊️ THÔNG ĐIỆP GỢI NHỚ · KEEPSAKE WALL'
+        : '🕊️ MEANINGFUL KEEPSAKE · MEMORY WALL';
+      document.getElementById('wallTitle').textContent = isVi
+        ? 'Gửi một thông điệp gợi nhớ cho chính bạn & cộng đồng IR DNA'
+        : 'Leave a Meaningful Memory Message for Yourself & IR DNA';
+      document.getElementById('wallSub').textContent = isVi
+        ? 'Để lại một lời dặn dò, một kỷ niệm đẹp hoặc điều bạn muốn nhớ nhất về bản sắc của mình khi mở email kết quả sau này.'
+        : 'Write a reminder, a fond memory, or what you want to remember about your identity when opening your result email later.';
+      document.getElementById('wallNoteInput').placeholder = isVi
+        ? 'Viết một thông điệp gợi nhớ đầy ý nghĩa để lưu lại tại triển lãm IR DNA...'
+        : 'Write a meaningful message to keep as a memory on the IR DNA wall...';
+      document.getElementById('wallSubmitBtn').textContent = isVi ? 'Lưu thông điệp' : 'Save Message';
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.toggle('dark');
+      document.getElementById('moonIcon').classList.toggle('hidden', isDark);
+      document.getElementById('sunIcon').classList.toggle('hidden', !isDark);
+    }
+
+    /* =========================================================================
+       4. ĐIỀU HƯỚNG CHECK-IN -> CÂU HỎI -> KẾT QUẢ
+    ========================================================================= */
+    function fillDemoId() {
+      const randomNum = Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('studentId').value = `IR26-${randomNum}`;
+      if (!document.getElementById('studentName').value.trim()) {
+        document.getElementById('studentName').value = currentLang === 'vi' ? 'Khách tham quan IR' : 'IR Visitor';
+      }
+      document.getElementById('idErrorMsg').classList.add('hidden');
+    }
+
+    function handleStartQuiz(e) {
+      e.preventDefault();
+      const idInput = document.getElementById('studentId').value.trim();
+      const nameInput = document.getElementById('studentName').value.trim();
+      const errorEl = document.getElementById('idErrorMsg');
+
+      if (!idInput) {
+        errorEl.classList.remove('hidden');
+        document.getElementById('studentId').focus();
+        return;
+      }
+
+      errorEl.classList.add('hidden');
+      studentId = idInput.toUpperCase();
+      studentName = nameInput;
+      studentEmail = document.getElementById('studentEmail').value.trim();
+      emailConfirmed = Boolean(studentEmail);
+      currentQuestionIndex = 0;
+      userAnswers = new Array(QUESTIONS.length).fill(null);
+
+      document.getElementById('screenLanding').classList.add('hidden');
+      document.getElementById('screenResult').classList.add('hidden');
+      document.getElementById('screenQuiz').classList.remove('hidden');
+      document.getElementById('activeStudentBadge').textContent = studentName
+        ? `${studentName} · ${studentId}`
+        : `MSSV: ${studentId}`;
+
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderQuestion() {
+      const isVi = currentLang === 'vi';
+      const q = QUESTIONS[currentQuestionIndex];
+      const total = QUESTIONS.length;
+
+      document.getElementById('questionCounter').textContent = isVi
+        ? `Câu ${currentQuestionIndex + 1} / ${total}`
+        : `Question ${currentQuestionIndex + 1} / ${total}`;
+
+      const percent = ((currentQuestionIndex + 1) / total) * 100;
+      document.getElementById('progressBar').style.width = `${percent}%`;
+
+      document.getElementById('questionTag').textContent = isVi ? q.tagVi : q.tagEn;
+      document.getElementById('questionText').textContent = isVi ? q.textVi : q.textEn;
+
+      const optionsList = document.getElementById('optionsList');
+      optionsList.innerHTML = '';
+
+      const letters = ['A', 'B', 'C', 'D'];
+      q.options.forEach((opt, idx) => {
+        const isSelected = userAnswers[currentQuestionIndex] === idx;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => selectOption(idx);
+        btn.className = `w-full text-left p-4 sm:p-5 rounded-2xl border transition-all flex items-start gap-3.5 cursor-pointer group ${
+          isSelected
+            ? 'bg-[#132238] text-white border-[#132238] dark:bg-sky-500 dark:text-slate-950 dark:border-sky-400 shadow-md'
+            : 'bg-[#F7F5F0]/75 hover:bg-white dark:bg-slate-800/80 dark:hover:bg-slate-800 text-[#132238] dark:text-slate-100 border-[#132238]/12 dark:border-slate-700 hover:border-[#132238]/35'
+        }`;
+
+        btn.innerHTML = `
+          <span class="w-7 h-7 rounded-xl flex items-center justify-center text-xs font-extrabold shrink-0 transition-colors ${
+            isSelected
+              ? 'bg-white/20 text-white dark:bg-slate-950/20 dark:text-slate-950'
+              : 'bg-white dark:bg-slate-700 text-[#132238] dark:text-slate-200 border border-[#132238]/10 dark:border-slate-600 group-hover:bg-[#132238] group-hover:text-white dark:group-hover:bg-sky-400 dark:group-hover:text-slate-950'
+          }">
+            ${letters[idx]}
+          </span>
+          <span class="text-sm sm:text-base font-medium leading-relaxed pt-0.5">
+            ${isVi ? opt.textVi : opt.textEn}
+          </span>
+        `;
+        optionsList.appendChild(btn);
+      });
+    }
+
+    function selectOption(optionIndex) {
+      userAnswers[currentQuestionIndex] = optionIndex;
+      renderQuestion();
+
+      setTimeout(() => {
+        if (currentQuestionIndex < QUESTIONS.length - 1) {
+          currentQuestionIndex++;
+          renderQuestion();
+        } else {
+          calculateAndShowResult();
+        }
+      }, 220);
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderQuestion();
+      } else {
+        document.getElementById('screenQuiz').classList.add('hidden');
+        document.getElementById('screenLanding').classList.remove('hidden');
+      }
+    }
+
+    function restartQuiz() {
+      currentQuestionIndex = 0;
+      userAnswers = new Array(QUESTIONS.length).fill(null);
+      document.getElementById('screenResult').classList.add('hidden');
+      document.getElementById('screenQuiz').classList.remove('hidden');
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetToHome() {
+      document.getElementById('screenQuiz').classList.add('hidden');
+      document.getElementById('screenResult').classList.add('hidden');
+      document.getElementById('screenLanding').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* =========================================================================
+       5. TÍNH ĐIỂM 6 MÃ GEN & HIỂN THỊ KẾT QUẢ
+    ========================================================================= */
+    function calculateAndShowResult() {
+      const rawScores = {
+        red: 1,
+        orange: 1,
+        yellow: 1,
+        green: 1,
+        blue: 1,
+        purple: 1,
+      };
+
+      userAnswers.forEach((ansIdx, qIdx) => {
+        if (ansIdx !== null) {
+          const chosen = QUESTIONS[qIdx].options[ansIdx];
+          Object.entries(chosen.scores).forEach(([geneKey, pts]) => {
+            rawScores[geneKey] += pts;
+          });
+        }
+      });
+
+      const totalPoints = Object.values(rawScores).reduce((sum, v) => sum + v, 0);
+      const ranked = Object.keys(rawScores)
+        .map((key) => ({
+          gene: GENES[key],
+          score: rawScores[key],
+          percent: Math.round((rawScores[key] / totalPoints) * 100),
+        }))
+        .sort((a, b) => b.score - a.score);
+
+      // Hiệu chỉnh làm tròn sao cho tổng bằng đúng 100%
+      const sumPercents = ranked.reduce((s, item) => s + item.percent, 0);
+      if (sumPercents !== 100) {
+        ranked[0].percent += 100 - sumPercents;
+      }
+
+      latestResultSummary = ranked;
+
+      // Tăng bộ đếm người tham gia trong localStorage
+      incrementParticipantCount();
+
+      // Chọn ngẫu nhiên một "tia" thông điệp khởi đầu phù hợp
+      drawRandomMessage(true);
+
+      document.getElementById('screenQuiz').classList.add('hidden');
+      document.getElementById('screenResult').classList.remove('hidden');
+      renderResultScreen(ranked);
+      renderWallNotes();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderResultScreen(ranked) {
+      const isVi = currentLang === 'vi';
+      const primary = ranked[0];
+      const secondary = ranked[1];
+
+      const banner = document.getElementById('resultBanner');
+      banner.style.background = primary.gene.gradient;
+
+      document.getElementById('resultStudentLabel').textContent = studentName
+        ? `${studentName} · ${studentId}`
+        : `MSSV: ${studentId}`;
+
+      document.getElementById('resultIntroGreeting').textContent = isVi
+        ? 'Mã gen bản sắc nổi bật nhất của bạn là:'
+        : 'Your most prominent identity color gene is:';
+
+      document.getElementById('resultGeneTitle').textContent = isVi
+        ? primary.gene.nameVi
+        : primary.gene.nameEn;
+
+      document.getElementById('resultGeneTagline').textContent = isVi
+        ? primary.gene.taglineVi
+        : primary.gene.taglineEn;
+
+      document.getElementById('resultPrimaryPercent').textContent = `${primary.percent}%`;
+      document.getElementById('resultPrimaryBadgeText').textContent = isVi ? 'Tia chủ đạo' : 'Primary Ray';
+
+      document.getElementById('secondaryDot').style.backgroundColor = secondary.gene.color;
+      document.getElementById('secondaryLabel').textContent = isVi
+        ? 'Tia màu bổ trợ song hành'
+        : 'Companion Secondary Gene';
+      document.getElementById('secondaryGeneName').textContent = isVi
+        ? `${secondary.gene.nameVi} (${secondary.percent}%)`
+        : `${secondary.gene.nameEn} (${secondary.percent}%)`;
+
+      document.getElementById('hybridNote').textContent = isVi
+        ? 'Sự giao thoa giữa hai tia màu này giúp bạn vừa phát huy thế mạnh cốt lõi, vừa linh hoạt thích ứng trong môi trường quốc tế.'
+        : 'The synergy between these two color rays empowers you to leverage your core strengths while adapting flexibly in global environments.';
+
+      document.getElementById('valTraits').textContent = isVi ? primary.gene.traitsVi : primary.gene.traitsEn;
+      document.getElementById('valStrengths').textContent = isVi ? primary.gene.strengthsVi : primary.gene.strengthsEn;
+      document.getElementById('valFields').textContent = isVi ? primary.gene.fieldsVi : primary.gene.fieldsEn;
+      document.getElementById('valSkills').textContent = isVi ? primary.gene.skillsVi : primary.gene.skillsEn;
+
+      // Render 6 thanh phổ màu IR DNA
+      const barsContainer = document.getElementById('geneBarsContainer');
+      barsContainer.innerHTML = '';
+      ranked.forEach((item) => {
+        const row = document.createElement('div');
+        row.className = 'space-y-1';
+        row.innerHTML = `
+          <div class="flex items-center justify-between text-xs sm:text-sm">
+            <span class="font-semibold text-[#132238] dark:text-slate-200 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: ${item.gene.color}"></span>
+              ${isVi ? item.gene.nameVi : item.gene.nameEn}
+            </span>
+            <span class="font-extrabold text-[#132238] dark:text-white">${item.percent}%</span>
+          </div>
+          <div class="w-full h-2.5 rounded-full bg-[#132238]/8 dark:bg-slate-800 overflow-hidden">
+            <div class="h-full rounded-full transition-all duration-700" style="width: ${item.percent}%; background-color: ${item.gene.color}"></div>
+          </div>
+        `;
+        barsContainer.appendChild(row);
+      });
+    }
+
+    /* =========================================================================
+       5. TÍNH ĐIỂM 6 MÃ GEN (LƯU NỘI BỘ ĐỂ GỬI MAIL) & HIỂN THỊ MÀN HÌNH XÁC NHẬN
+    ========================================================================= */
+    function calculateAndShowResult() {
+      const rawScores = {
+        red: 1,
+        orange: 1,
+        yellow: 1,
+        green: 1,
+        blue: 1,
+        purple: 1,
+      };
+
+      userAnswers.forEach((ansIdx, qIdx) => {
+        if (ansIdx !== null) {
+          const chosen = QUESTIONS[qIdx].options[ansIdx];
+          Object.entries(chosen.scores).forEach(([geneKey, pts]) => {
+            rawScores[geneKey] += pts;
+          });
+        }
+      });
+
+      const totalPoints = Object.values(rawScores).reduce((sum, v) => sum + v, 0);
+      const ranked = Object.keys(rawScores)
+        .map((key) => ({
+          gene: GENES[key],
+          score: rawScores[key],
+          percent: Math.round((rawScores[key] / totalPoints) * 100),
+        }))
+        .sort((a, b) => b.score - a.score);
+
+      // Hiệu chỉnh làm tròn sao cho tổng bằng đúng 100%
+      const sumPercents = ranked.reduce((s, item) => s + item.percent, 0);
+      if (sumPercents !== 100) {
+        ranked[0].percent += 100 - sumPercents;
+      }
+
+      latestResultSummary = ranked;
+
+      // Tăng bộ đếm người tham gia trong localStorage
+      incrementParticipantCount();
+
+      // Chọn ngẫu nhiên một "tia" thông điệp khởi đầu phù hợp
+      drawRandomMessage(true);
+
+      document.getElementById('screenQuiz').classList.add('hidden');
+      document.getElementById('screenResult').classList.remove('hidden');
+      renderEmailConfirmationScreen();
+      renderWallNotes();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderEmailConfirmationScreen() {
+      document.getElementById('resultStudentLabel').textContent = studentName
+        ? `${studentName} · ${studentId}`
+        : `MSSV: ${studentId}`;
+      document.getElementById('confirmEmailInput').value = studentEmail || '';
+      updateEmailStatusUI();
+      updateMessageDisplay();
+    }
+
+    function drawRandomMessage(initial = false) {
+      if (!initial && MESSAGES_50.length > 1) {
+        let nextIdx = Math.floor(Math.random() * MESSAGES_50.length);
+        if (nextIdx === currentMessageIndex) {
+          nextIdx = (nextIdx + 1) % MESSAGES_50.length;
+        }
+        currentMessageIndex = nextIdx;
+      } else if (initial) {
+        currentMessageIndex = Math.floor(Math.random() * MESSAGES_50.length);
+      }
+      updateMessageDisplay();
+    }
+
+    function updateMessageDisplay() {
+      const msg = MESSAGES_50[currentMessageIndex] || MESSAGES_50[0];
+      const isVi = currentLang === 'vi';
+      const idxNum = String(currentMessageIndex + 1).padStart(2, '0');
+
+      const badgeEl = document.getElementById('messageIndexBadge');
+      const catEl = document.getElementById('messageCategoryBadge');
+      const textEl = document.getElementById('randomMessageText');
+      const cardEl = document.getElementById('randomMessageCard');
+
+      if (badgeEl) badgeEl.textContent = isVi ? `Tia #${idxNum} / 50` : `Ray #${idxNum} / 50`;
+      if (catEl) catEl.textContent = isVi ? msg.catVi : msg.catEn;
+      if (textEl) textEl.textContent = `“${msg.text}”`;
+
+      if (cardEl) {
+        cardEl.classList.remove('message-pop');
+        void cardEl.offsetWidth;
+        cardEl.classList.add('message-pop');
+      }
+    }
+
+    function copyCurrentMessage() {
+      const msg = MESSAGES_50[currentMessageIndex] || MESSAGES_50[0];
+      const payload = `“${msg.text}” — IR DNA (IDENTITY – WHO WE ARE)`;
+
+      const tempArea = document.createElement('textarea');
+      tempArea.value = payload;
+      tempArea.setAttribute('readonly', '');
+      tempArea.style.position = 'absolute';
+      tempArea.style.left = '-9999px';
+      document.body.appendChild(tempArea);
+      tempArea.select();
+
+      try {
+        document.execCommand('copy');
+        showToast(currentLang === 'vi' ? 'Đã sao chép tia thông điệp!' : 'Message copied!');
+      } catch (err) {
+        showToast(currentLang === 'vi' ? 'Không thể sao chép tự động.' : 'Unable to copy automatically.');
+      }
+      document.body.removeChild(tempArea);
+    }
+
+    function handleConfirmEmail(e) {
+      e.preventDefault();
+      const inputVal = document.getElementById('confirmEmailInput').value.trim();
+      const isVi = currentLang === 'vi';
+
+      if (!inputVal) {
+        showToast(isVi ? 'Vui lòng nhập địa chỉ email để nhận kết quả.' : 'Please enter an email address to receive your result.');
+        document.getElementById('confirmEmailInput').focus();
+        return;
+      }
+
+      studentEmail = inputVal;
+      emailConfirmed = true;
+      updateEmailStatusUI();
+      sendSurveyResultEmail(studentEmail);
+    }
+
+    function buildResultEmailPayload(targetEmail) {
+      const ranked = Array.isArray(latestResultSummary) && latestResultSummary.length > 0 ? latestResultSummary : [];
+      const primary = ranked[0] ? ranked[0].gene.nameVi : 'Đang tổng hợp';
+      const secondary = ranked[1] ? `${ranked[1].gene.nameVi} (${ranked[1].percent}%)` : 'Đang tổng hợp';
+      const breakdown = ranked
+        .map((item) => `- ${item.gene.nameVi}: ${item.percent}% (${item.gene.fieldsVi})`)
+        .join('\n');
+
+      return {
+        to_email: targetEmail,
+        student_name: studentName || 'Sinh viên IR DNA',
+        student_id: studentId || 'N/A',
+        primary_gene: primary,
+        secondary_gene: secondary,
+        gene_breakdown: breakdown,
+        summary_text: `Hồ sơ giải mã IR DNA của ${studentName || studentId} đã sẵn sàng. Mã gen nổi bật: ${primary}.`,
+      };
+    }
+
+    async function sendSurveyResultEmail(targetEmail) {
+      const isVi = currentLang === 'vi';
+      const canSendReal =
+        EMAILJS_CONFIG.enabled &&
+        window.emailjs &&
+        EMAILJS_CONFIG.publicKey !== 'YOUR_EMAILJS_PUBLIC_KEY' &&
+        EMAILJS_CONFIG.serviceId !== 'YOUR_EMAILJS_SERVICE_ID' &&
+        EMAILJS_CONFIG.templateId !== 'YOUR_EMAILJS_TEMPLATE_ID';
+
+      if (!canSendReal) {
+        showToast(
+          isVi
+            ? `Đã lưu mail ${targetEmail} (chế độ thử nghiệm — hãy bật EmailJS để gửi mail thật).`
+            : `Saved ${targetEmail} (demo mode — enable EmailJS to send real emails).`
+        );
+        return;
+      }
+
+      try {
+        const payload = buildResultEmailPayload(targetEmail);
+        await window.emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, payload);
+        showToast(
+          isVi
+            ? `Đã gửi hồ sơ IR DNA tới ${targetEmail}! Kiểm tra hộp thư (hoặc Spam).`
+            : `Sent IR DNA profile to ${targetEmail}! Check Inbox (or Spam).`
+        );
+      } catch (err) {
+        showToast(
+          isVi
+            ? 'Gửi mail chưa thành công, vui lòng kiểm tra lại cấu hình EmailJS.'
+            : 'Failed to send email, please check your EmailJS configuration.'
+        );
+      }
+    }
+
+    function updateEmailStatusUI() {
+      const isVi = currentLang === 'vi';
+      const badgeEl = document.getElementById('dispatchStatusBadge');
+      const indicatorEl = document.getElementById('emailSavedIndicator');
+      const detailEl = document.getElementById('emailDeliveryDetail');
+
+      if (studentEmail) {
+        badgeEl.textContent = emailConfirmed
+          ? (isVi ? 'Đã xác nhận mail' : 'Email Confirmed')
+          : (isVi ? 'Sẵn sàng gửi' : 'Ready to Send');
+        indicatorEl.textContent = isVi
+          ? `✓ Sẽ gửi tới: ${studentEmail}`
+          : `✓ Will be sent to: ${studentEmail}`;
+        detailEl.textContent = isVi
+          ? `Hồ sơ giải mã IR DNA của bạn (MSSV: ${studentId}) sẽ được gửi qua email ${studentEmail}. Bạn có thể chỉnh sửa và nhấn "Xác nhận gửi mail" bất cứ lúc nào.`
+          : `Your IR DNA profile (ID: ${studentId}) will be sent to ${studentEmail}. You can update it and click "Confirm Email" anytime.`;
+      } else {
+        badgeEl.textContent = isVi ? 'Chờ nhập email' : 'Email Needed';
+        indicatorEl.textContent = isVi
+          ? '• Chưa có email nhận kết quả'
+          : '• No delivery email yet';
+        detailEl.textContent = isVi
+          ? `Bạn chưa điền email ở bước đầu. Hãy nhập địa chỉ email của bạn và nhấn "Xác nhận gửi mail" để đội ngũ IR DNA gửi hồ sơ kết quả cho bạn.`
+          : `No email was entered at the start. Please enter your email and click "Confirm Email" so the IR DNA team can deliver your profile.`;
+      }
+    }
+    function insertKeepsakePrompt(type) {
+      const input = document.getElementById('wallNoteInput');
+      const prompts = {
+        'vi-self': 'Gửi mình của ngày mở mail kết quả: hãy luôn giữ sự tò mò, tử tế và dũng cảm bước tiếp với màu sắc của riêng mình!',
+        'vi-team': 'Cảm ơn nhóm IR DNA – HUFLIT đã tạo nên một không gian khám phá bản sắc thật ấm áp và giàu cảm hứng!',
+        'vi-ir': 'Sinh viên Quan hệ quốc tế HUFLIT – đa bản sắc, vững vàng hội nhập và luôn kết nối bằng sự thấu hiểu.',
+      };
+      input.value = prompts[type] || '';
+      input.focus();
+    }
+
+    function handleAddWallNote(e) {
+      e.preventDefault();
+      const input = document.getElementById('wallNoteInput');
+      const content = input.value.trim();
+      if (!content) return;
+
+      const primary = latestResultSummary ? latestResultSummary[0].gene : GENES.blue;
+      const shortGene = primary.nameVi.split('–')[0].trim();
+      const authorLabel = `${studentName || studentId || 'Thành viên IR'} · ${shortGene}`;
+
+      const notes = getWallNotes();
+      notes.unshift({
+        author: authorLabel,
+        color: primary.color,
+        text: content,
+      });
+
+      const trimmed = notes.slice(0, 8);
+      try {
+        localStorage.setItem('ir_dna_wall_notes', JSON.stringify(trimmed));
+      } catch (e) {}
+
+      input.value = '';
+      renderWallNotes();
+      showToast(currentLang === 'vi' ? 'Đã lưu thông điệp gợi nhớ của bạn!' : 'Your memory message has been saved!');
+    }
+
+    /* =========================================================================
+       8. BỨC TƯỜNG LƯU BÚT & BỘ ĐẾM NGƯỜI THAM GIA (LOCALSTORAGE)
+    ========================================================================= */
+    function getParticipantCount() {
+      try {
+        const saved = parseInt(localStorage.getItem('ir_dna_count') || '128', 10);
+        return isNaN(saved) ? 128 : saved;
+      } catch (e) {
+        return 128;
+      }
+    }
+
+    function incrementParticipantCount() {
+      const next = getParticipantCount() + 1;
+      try {
+        localStorage.setItem('ir_dna_count', String(next));
+      } catch (e) {}
+      updateParticipantBadge(next);
+    }
+
+    function updateParticipantBadge(count) {
+      const badge = document.getElementById('participantCounterBadge');
+      badge.textContent = currentLang === 'vi'
+        ? `${count} mảnh ghép đã tham gia`
+        : `${count} pieces joined`;
+    }
+
+    function getWallNotes() {
+      try {
+        const raw = localStorage.getItem('ir_dna_wall_notes');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {}
+      return DEFAULT_WALL_NOTES;
+    }
+
+    function handleAddWallNote(e) {
+      e.preventDefault();
+      const input = document.getElementById('wallNoteInput');
+      const content = input.value.trim();
+      if (!content) return;
+
+      const primary = latestResultSummary ? latestResultSummary[0].gene : GENES.blue;
+      const shortGene = primary.nameVi.split('–')[0].trim();
+      const authorLabel = `${studentName || studentId || 'Thành viên IR'} · ${shortGene}`;
+
+      const notes = getWallNotes();
+      notes.unshift({
+        author: authorLabel,
+        color: primary.color,
+        text: content,
+      });
+
+      const trimmed = notes.slice(0, 8);
+      try {
+        localStorage.setItem('ir_dna_wall_notes', JSON.stringify(trimmed));
+      } catch (e) {}
+
+      input.value = '';
+      renderWallNotes();
+      showToast(currentLang === 'vi' ? 'Đã gắn dấu ấn của bạn lên tường IR DNA!' : 'Your note has been pinned to the IR DNA wall!');
+    }
+
+    function renderWallNotes() {
+      updateParticipantBadge(getParticipantCount());
+      const grid = document.getElementById('wallNotesGrid');
+      const notes = getWallNotes();
+      grid.innerHTML = '';
+
+      notes.slice(0, 6).forEach((note) => {
+        const card = document.createElement('div');
+        card.className = 'p-4 rounded-2xl bg-[#F7F5F0]/85 dark:bg-slate-800/80 border border-[#132238]/8 dark:border-slate-700 space-y-1.5';
+        card.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${note.color}"></span>
+            <span class="text-xs font-bold text-[#132238] dark:text-slate-200">${escapeHtml(note.author)}</span>
+          </div>
+          <p class="text-xs sm:text-sm text-[#132238]/80 dark:text-slate-300 leading-relaxed">
+            “${escapeHtml(note.text)}”
+          </p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    /* =========================================================================
+       9. TOAST NOTIFICATION HELPER
+    ========================================================================= */
+    let toastTimer = null;
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      toast.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-2');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-2');
+      }, 2400);
+    }
+
+    // Khởi tạo giao diện ban đầu
+    window.addEventListener('DOMContentLoaded', () => {
+      applyTranslations();
+      renderWallNotes();
+    });
+  </script>
+</body>
+</html>
